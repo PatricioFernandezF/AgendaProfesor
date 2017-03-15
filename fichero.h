@@ -44,7 +44,7 @@ typedef struct{
     char descripcion[30];
     char estado_falta[17];
     char id_alumno[6];
-}Faltas;
+}Falta;
 
 typedef struct{
     char id_profesor[3];
@@ -55,11 +55,6 @@ typedef struct{
 }Horario;
 
 /*
-
-typedef struct{
-    char campo[31];
-    int valor;
-}Conf;
 
 Equipo* obtenerEquipos();
 Jugador* obtenerJugadores();

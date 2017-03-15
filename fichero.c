@@ -12,109 +12,49 @@ int N_CALIFICACIONES = 0;
 int N_FALTAS = 0;
 int N_HORARIOS = 0;
 
-Equipo obtenerUsuario(char *cadena){
-    Equipo e;
-    sscanf(cadena,"%s%s", e.codigo, e.nombre);
-    return e;
-}
-
-Jugador obtenerAlumno(char *cadena){
-    Jugador j;
-    sscanf(cadena,"%s%s%s%d%d", j.codigo, j.codigo_equipo, j.nombre, &j.precio, &j.valoracion);
-    return j;
-}
-
-Usuario obtenerMateria(char *cadena){
+Usuario obtenerUsuario(char *cadena){
     Usuario u;
-    sscanf(cadena,"%s%s%s%s%s", u.codigo, u.login, u.nombre, u.pass, u.tipo);
+    sscanf(cadena,"%s-%s-%s-%s-%s", u.id_usuario, u.nombre,u.perfil,u.login,u.pass);
     return u;
 }
 
-Plantilla obtenerPlantilla(char* cadena){
-    Plantilla p;
-    sscanf(cadena, "%s%s%s%d%d", p.codigo_usuario, p.codigo, p.nombre, &p.presupuesto, &p.puntuacion);
-    return p;
+Alumno obtenerAlumno(char *cadena){
+    Alumno a;
+    sscanf(cadena,"%s-%s-%s-%s-%s-%s", a.id_alumno,a.nombre,a.direccion,a.localidad,a.curso,a.grupo);
+    return a;
 }
 
-Jug_plan obtenerJugPlan(char* cadena){
-    Jug_plan jp;
-    sscanf(cadena, "%s%s", jp.codigo_jugador, jp.codigo_plantilla);
-    return jp;
+Materia obtenerMateria(char *cadena){
+    Materia m;
+    sscanf(cadena,"%s-%s-%s", m.id_materia, m.nombre,m.abreviatura);
+    return m;
 }
 
-Conf obtenerConfiguracion(char* cadena){
-    Conf c;
-    sscanf(cadena, "%s%d", c.campo, &c.valor);
+Matricula obtenerMatricula(char* cadena){
+    Matricula m;
+    sscanf(cadena,"%s-%s", m.id_materia,m.id_alumno);
+    return m;
+}
+
+Calificacion obtenerCalificacion(char* cadena){
+    Calificacion c;
+    sscanf(cadena,"%s-%s-%s-%s-%s", c.fecha,c.descripcion,c.id_materia,c.id_alumno,c.calificacion);
     return c;
+}
+
+Falta obtenerFalta(char* cadena){
+    Falta f;
+    sscanf(cadena,"%s-%d-%s-%s-%s", f.fecha,&f.hora,f.descripcion,f.estado_falta,f.id_alumno);
+    return f;
+}
+
+Horario obtenerHorario(char* cadena){
+    Horario h;
+    sscanf(cadena,"%s-%d-%d-%s-%s", h.id_profesor,&h.dia,&h.hora,h.id_materia,h.grupo);
+    return h;
 }
 // FUNCIONES PUBLICAS
 
-
-// Cabecera: Equipo* obtenerEquipos()
-// Precondicion:
-// Poscondicion:
-Equipo* obtenerEquipos(){
-    FILE *FICHERO_EQUIPO = fopen("equipos.txt", "r");
-    char c;
-    char *cadena = (char*) calloc(1,sizeof(char));
-    int contadorChar = 0;
-    Equipo *e = (Equipo*) calloc(1,sizeof(Equipo));
-    while((c = fgetc(FICHERO_EQUIPO))!=EOF){
-        if(c == '\n'){
-            N_EQUIPO++;
-            e = (Equipo*) realloc(e, N_EQUIPO*sizeof(Equipo));
-            cadena = (char*) realloc(cadena, (contadorChar+1)*sizeof(char));
-            cadena[contadorChar] = '\0';
-            e[N_EQUIPO-1] = obtenerEquipo(cadena);
-            contadorChar = 0;
-            cadena = (char*) calloc(1, sizeof(char));
-        }else{
-            contadorChar++;
-            cadena = (char*) realloc(cadena, (contadorChar)*sizeof(char));
-            cadena[contadorChar-1] = c;
-        }
-    }
-    N_EQUIPO++;
-    e = (Equipo*) realloc(e, N_EQUIPO*sizeof(Equipo));
-    cadena = (char*) realloc(cadena, (contadorChar+1)*sizeof(char));
-    cadena[contadorChar] = '\0';
-    e[N_EQUIPO-1] = obtenerEquipo(cadena);
-    contadorChar = 0;
-    cadena = (char*) calloc(1, sizeof(char));
-    fclose(FICHERO_EQUIPO);
-    return e;
-}
-
-// Cabecera: Jugador* obtenerJugadores()
-// Precondicion:
-// Poscondicion:
-Jugador* obtenerJugadores(){
-    FILE *FICHERO_JUGADOR = fopen("futbolistas.txt", "r");
-    char c;
-    char *cadena = (char*) malloc(sizeof(char));
-    int contadorChar = 0;
-    Jugador *j = (Jugador*) malloc(sizeof(Jugador));
-    while((c = fgetc(FICHERO_JUGADOR))!=EOF){
-        if(c == '\n'){
-            N_JUGADOR++;
-            j = (Jugador*) realloc(j, N_JUGADOR*sizeof(Jugador));
-            j[N_JUGADOR-1] = obtenerJugador(cadena);
-            contadorChar = 0;
-            cadena = (char*) calloc(1, sizeof(char));
-        }else{
-            contadorChar++;
-            cadena = (char*) realloc(cadena, (contadorChar)*sizeof(char));
-            cadena[contadorChar-1] = c;
-        }
-    }
-    N_JUGADOR++;
-    j = (Jugador*) realloc(j, N_JUGADOR*sizeof(Jugador));
-    j[N_JUGADOR-1] = obtenerJugador(cadena);
-    contadorChar = 0;
-    cadena = (char*) calloc(1, sizeof(char));
-    fclose(FICHERO_JUGADOR);
-    return j;
-}
 
 // Cabecera: Usuario* obtenerUsuarios()
 // Precondicion:
@@ -122,14 +62,16 @@ Jugador* obtenerJugadores(){
 Usuario* obtenerUsuarios(){
     FILE *FICHERO_USUARIO = fopen("usuarios.txt", "r");
     char c;
-    char *cadena = (char*) malloc(sizeof(char));
+    char *cadena = (char*) calloc(1,sizeof(char));
     int contadorChar = 0;
-    Usuario *u = (Usuario*) malloc(sizeof(Usuario));
+    Usuario *e = (Usuario*) calloc(1,sizeof(Usuario));
     while((c = fgetc(FICHERO_USUARIO))!=EOF){
         if(c == '\n'){
-            N_USUARIO++;
-            u = (Usuario*) realloc(u, N_USUARIO*sizeof(Usuario));
-            u[N_USUARIO-1] = obtenerUsuario(cadena);
+            N_USUARIOS++;
+            e = (Usuario*) realloc(e, N_USUARIOS*sizeof(Usuario));
+            cadena = (char*) realloc(cadena, (contadorChar+1)*sizeof(char));
+            cadena[contadorChar] = '\0';
+            e[N_USUARIOS-1] = obtenerUsuario(cadena);
             contadorChar = 0;
             cadena = (char*) calloc(1, sizeof(char));
         }else{
@@ -138,31 +80,95 @@ Usuario* obtenerUsuarios(){
             cadena[contadorChar-1] = c;
         }
     }
-    N_USUARIO++;
-    u = (Usuario*) realloc(u, N_USUARIO*sizeof(Usuario));
-    u[N_USUARIO-1] = obtenerUsuario(cadena);
+    N_USUARIOS++;
+    e = (Usuario*) realloc(e, N_USUARIOS*sizeof(Usuario));
+    cadena = (char*) realloc(cadena, (contadorChar+1)*sizeof(char));
+    cadena[contadorChar] = '\0';
+    e[N_USUARIOS-1] = obtenerUsuario(cadena);
     contadorChar = 0;
     cadena = (char*) calloc(1, sizeof(char));
     fclose(FICHERO_USUARIO);
+    return e;
+}
+
+// Cabecera: Jugador* obtenerJugadores()
+// Precondicion:
+// Poscondicion:
+Alumno* obtenerAlumnos(){
+    FILE *FICHERO_ALUMNO = fopen("alumnos.txt", "r");
+    char c;
+    char *cadena = (char*) malloc(sizeof(char));
+    int contadorChar = 0;
+    Alumno *j = (Alumno*) malloc(sizeof(Alumno));
+    while((c = fgetc(FICHERO_ALUMNO))!=EOF){
+        if(c == '\n'){
+            N_ALUMNOS++;
+            j = (Alumno*) realloc(j, N_ALUMNOS*sizeof(Alumno));
+            j[N_ALUMNOS-1] = obtenerAlumno(cadena);
+            contadorChar = 0;
+            cadena = (char*) calloc(1, sizeof(char));
+        }else{
+            contadorChar++;
+            cadena = (char*) realloc(cadena, (contadorChar)*sizeof(char));
+            cadena[contadorChar-1] = c;
+        }
+    }
+    N_ALUMNOS++;
+    j = (Alumno*) realloc(j, N_ALUMNOS*sizeof(Alumno));
+    j[N_ALUMNOS-1] = obtenerAlumno(cadena);
+    contadorChar = 0;
+    cadena = (char*) calloc(1, sizeof(char));
+    fclose(FICHERO_ALUMNO);
+    return j;
+}
+
+// Cabecera: Usuario* obtenerUsuarios()
+// Precondicion:
+// Poscondicion:
+Materia* obtenerMaterias(){
+    FILE *FICHERO_MATERIA = fopen("materias.txt", "r");
+    char c;
+    char *cadena = (char*) malloc(sizeof(char));
+    int contadorChar = 0;
+    Materia *u = (Materia*) malloc(sizeof(Materia));
+    while((c = fgetc(FICHERO_MATERIA))!=EOF){
+        if(c == '\n'){
+            N_MATERIAS++;
+            u = (Materia*) realloc(u, N_MATERIAS*sizeof(Materia));
+            u[N_MATERIAS-1] = obtenerMateria(cadena);
+            contadorChar = 0;
+            cadena = (char*) calloc(1, sizeof(char));
+        }else{
+            contadorChar++;
+            cadena = (char*) realloc(cadena, (contadorChar)*sizeof(char));
+            cadena[contadorChar-1] = c;
+        }
+    }
+    N_MATERIAS++;
+    u = (Materia*) realloc(u, N_MATERIAS*sizeof(Materia));
+    u[N_MATERIAS-1] = obtenerMateria(cadena);
+    contadorChar = 0;
+    cadena = (char*) calloc(1, sizeof(char));
+    fclose(FICHERO_MATERIA);
     return u;
 }
 
 // Cabecera: Plantilla* obtenerPlantillas()
 // Precondicion:
 // Poscondicion:
-Plantilla* obtenerPlantillas(){
-    FILE *FICHERO_PLANTILLA = fopen("plantillas.txt", "r");
+Matricula* obtenerMatriculas(){
+    FILE *FICHERO_MATRICULA = fopen("matriculas.txt", "r");
     char c;
     char *cadena = (char*) calloc(1,sizeof(char));
     int contadorChar = 0;
-    Plantilla *p = (Plantilla*) calloc(1,sizeof(Plantilla));
-    while((c = fgetc(FICHERO_PLANTILLA))!=EOF){
+    Matricula *p = (Matricula*) calloc(1,sizeof(Matricula));
+    while((c = fgetc(FICHERO_MATRICULA))!=EOF){
         if(c == '\n'){
-            N_PLANTILLA++;
-            p = (Plantilla*) realloc(p, N_PLANTILLA*sizeof(Plantilla));
+            N_MATRICULAS++;
+            p = (Matricula*) realloc(p, N_MATRICULAS*sizeof(Matricula));
             cadena = (char*) realloc(cadena, (contadorChar+1)*sizeof(char));
             cadena[contadorChar] = '\0';
-            p[N_PLANTILLA-1] = obtenerPlantilla(cadena);
+            p[N_MATRICULAS-1] = obtenerMatricula(cadena);
             contadorChar = 0;
             cadena = (char*) calloc(1, sizeof(char));
         }else{
@@ -171,17 +177,121 @@ Plantilla* obtenerPlantillas(){
             cadena[contadorChar-1] = c;
         }
     }
-    N_PLANTILLA++;
-    p = (Plantilla*) realloc(p, N_PLANTILLA*sizeof(Plantilla));
+    N_MATRICULAS++;
+    p = (Materia*) realloc(p, N_MATRICULAS*sizeof(Matricula));
     cadena = (char*) realloc(cadena, (contadorChar+1)*sizeof(char));
     cadena[contadorChar] = '\0';
-    p[N_PLANTILLA-1] = obtenerPlantilla(cadena);
+    p[N_MATRICULAS-1] = obtenerMatricula(cadena);
     contadorChar = 0;
     cadena = (char*) calloc(1, sizeof(char));
-    fclose(FICHERO_PLANTILLA);
+    fclose(FICHERO_MATRICULA);
     return p;
 }
 
+// Cabecera: Plantilla* obtenerPlantillas()
+// Precondicion:
+// Poscondicion:
+Calificacion* obtenerCalificaciones(){
+    FILE *FICHERO_CALIFICACIONES = fopen("calificaciones.txt", "r");
+    char c;
+    char *cadena = (char*) calloc(1,sizeof(char));
+    int contadorChar = 0;
+    Calificacion *p = (Calificacion*) calloc(1,sizeof(Calificacion));
+    while((c = fgetc(FICHERO_CALIFICACIONES))!=EOF){
+        if(c == '\n'){
+            N_CALIFICACIONES++;
+            p = (Calificacion*) realloc(p, N_CALIFICACIONES*sizeof(Calificacion));
+            cadena = (char*) realloc(cadena, (contadorChar+1)*sizeof(char));
+            cadena[contadorChar] = '\0';
+            p[N_CALIFICACIONES-1] = obtenerCalificacion(cadena);
+            contadorChar = 0;
+            cadena = (char*) calloc(1, sizeof(char));
+        }else{
+            contadorChar++;
+            cadena = (char*) realloc(cadena, (contadorChar)*sizeof(char));
+            cadena[contadorChar-1] = c;
+        }
+    }
+    N_CALIFICACIONES++;
+    p = (Calificacion*) realloc(p, N_CALIFICACIONES*sizeof(Calificacion));
+    cadena = (char*) realloc(cadena, (contadorChar+1)*sizeof(char));
+    cadena[contadorChar] = '\0';
+    p[N_CALIFICACIONES-1] = obtenerCalificacion(cadena);
+    contadorChar = 0;
+    cadena = (char*) calloc(1, sizeof(char));
+    fclose(FICHERO_CALIFICACIONES);
+    return p;
+}
+
+// Cabecera: Plantilla* obtenerPlantillas()
+// Precondicion:
+// Poscondicion:
+Calificacion* obtenerFaltas(){
+    FILE *FICHERO_FALTAS = fopen("faltas.txt", "r");
+    char c;
+    char *cadena = (char*) calloc(1,sizeof(char));
+    int contadorChar = 0;
+    Falta *p = (Falta*) calloc(1,sizeof(Falta));
+    while((c = fgetc(FICHERO_FALTAS))!=EOF){
+        if(c == '\n'){
+            N_FALTAS++;
+            p = (Falta*) realloc(p, N_FALTAS*sizeof(Falta));
+            cadena = (char*) realloc(cadena, (contadorChar+1)*sizeof(char));
+            cadena[contadorChar] = '\0';
+            p[N_FALTAS-1] = obtenerFalta(cadena);
+            contadorChar = 0;
+            cadena = (char*) calloc(1, sizeof(char));
+        }else{
+            contadorChar++;
+            cadena = (char*) realloc(cadena, (contadorChar)*sizeof(char));
+            cadena[contadorChar-1] = c;
+        }
+    }
+    N_FALTAS++;
+    p = (Falta*) realloc(p, N_FALTAS*sizeof(Falta));
+    cadena = (char*) realloc(cadena, (contadorChar+1)*sizeof(char));
+    cadena[contadorChar] = '\0';
+    p[N_FALTAS-1] = obtenerFalta(cadena);
+    contadorChar = 0;
+    cadena = (char*) calloc(1, sizeof(char));
+    fclose(FICHERO_FALTAS);
+    return p;
+}
+
+// Cabecera: Plantilla* obtenerPlantillas()
+// Precondicion:
+// Poscondicion:
+Horario* obtenerHorarios(){
+    FILE *FICHERO_HORARIO = fopen("horarios.txt", "r");
+    char c;
+    char *cadena = (char*) calloc(1,sizeof(char));
+    int contadorChar = 0;
+    Horario *p = (Horario*) calloc(1,sizeof(Horario));
+    while((c = fgetc(FICHERO_HORARIO))!=EOF){
+        if(c == '\n'){
+            N_HORARIOS++;
+            p = (Horario*) realloc(p, N_HORARIOS*sizeof(Horario));
+            cadena = (char*) realloc(cadena, (contadorChar+1)*sizeof(char));
+            cadena[contadorChar] = '\0';
+            p[N_HORARIOS-1] = obtenerHorario(cadena);
+            contadorChar = 0;
+            cadena = (char*) calloc(1, sizeof(char));
+        }else{
+            contadorChar++;
+            cadena = (char*) realloc(cadena, (contadorChar)*sizeof(char));
+            cadena[contadorChar-1] = c;
+        }
+    }
+    N_HORARIOS++;
+    p = (Horario*) realloc(p, N_HORARIOS*sizeof(Horario));
+    cadena = (char*) realloc(cadena, (contadorChar+1)*sizeof(char));
+    cadena[contadorChar] = '\0';
+    p[N_HORARIOS-1] = obtenerHorario(cadena);
+    contadorChar = 0;
+    cadena = (char*) calloc(1, sizeof(char));
+    fclose(FICHERO_HORARIO);
+    return p;
+}
 // Cabecera: Jug_plan* obtenerJugadoresPlantillas()
 // Precondicion:
 // Poscondicion:
