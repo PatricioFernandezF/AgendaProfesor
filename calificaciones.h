@@ -5,7 +5,7 @@
 
 void menuCalificaciones();
 void mostrarCalificaciones(Alumno*, Materia*);
-void añadirCalificaciones(Alumno*, Materia*, int*);
+void anadirCalificaciones(Alumno*, Materia*, int*);
 void modificarCalificaciones(Alumno*, Materia*, int*);
 void eliminarCalificaciones(Alumno*, Materia*);
 

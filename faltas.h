@@ -5,7 +5,7 @@
 
 void menuFaltas();
 void mostrarFaltas(Alumno*);
-void añadirFaltas(Alumno*, Falta*);
+void anadirFaltas(Alumno*, Falta*);
 void modificarFaltas(Alumno*, Falta*);
 void borrarFaltas(Alumno*, Falta*);
 
