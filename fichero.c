@@ -387,7 +387,7 @@ void guardarDatosCalificaciones(Calificacion* calificaciones, int elementos){
             fprintf(FICHERO_CALIFICACION, "\n%s-%s-%s-%s-%d", e.fecha,e.descripcion,e.id_materia,e.id_alumno,e.calificacion);
         }
     }
-    fclose(FICHERO_MATRICULA);
+    fclose(FICHERO_CALIFICACION);
 }
 
 void guardarDatosFaltas(Falta* faltas, int elementos){
@@ -421,7 +421,7 @@ void guardarDatosHorarios(Horario* horarios, int elementos){
 }
 
 int nUsuarios(){
-    return N_USUARIO;
+    return N_USUARIOS;
 }
 
 int nAlumnos(){
