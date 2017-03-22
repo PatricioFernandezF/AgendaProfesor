@@ -56,6 +56,25 @@ Horario obtenerHorario(char* cadena){
 // FUNCIONES PUBLICAS
 
 
+Usuario loguear(char* logUsuario, char* passUsuario){
+    /*
+    Usuario *u = obtenerUsuarios();
+    Usuario usuario;
+    int dimension = nUsuarios();
+    int encontrado = 0;
+    int cont = 0;
+    while(cont < dimension && encontrado == 0){
+        if(strcmp(u[cont].login, logUsuario) == 0 && strcmp(u[cont].pass, passUsuario) == 0){
+            encontrado = 1;
+            usuario = u[cont];
+        }
+        cont++;
+    }
+    return usuario;
+    */
+}
+
+
 // Cabecera: Usuario* obtenerUsuarios()
 // Precondicion:
 // Poscondicion:
@@ -91,7 +110,7 @@ Usuario* obtenerUsuarios(){
     return e;
 }
 
-// Cabecera: Jugador* obtenerJugadores()
+// Cabecera: Alumno* obtenerAlumnos()
 // Precondicion:
 // Poscondicion:
 Alumno* obtenerAlumnos(){
@@ -223,10 +242,10 @@ Calificacion* obtenerCalificaciones(){
     return p;
 }
 
-// Cabecera: Plantilla* obtenerPlantillas()
+// Cabecera: Falta* obtenerFaltas()
 // Precondicion:
 // Poscondicion:
-Calificacion* obtenerFaltas(){
+Falta* obtenerFaltas(){
     FILE *FICHERO_FALTAS = fopen("faltas.txt", "r");
     char c;
     char *cadena = (char*) calloc(1,sizeof(char));
@@ -258,7 +277,7 @@ Calificacion* obtenerFaltas(){
     return p;
 }
 
-// Cabecera: Plantilla* obtenerPlantillas()
+// Cabecera: Horario* obtenerHorarios()
 // Precondicion:
 // Poscondicion:
 Horario* obtenerHorarios(){
@@ -292,173 +311,135 @@ Horario* obtenerHorarios(){
     fclose(FICHERO_HORARIO);
     return p;
 }
-// Cabecera: Jug_plan* obtenerJugadoresPlantillas()
-// Precondicion:
-// Poscondicion:
-Jug_plan* obtenerJugadoresPlantillas(){
-    FILE *FICHERO_JUG_PLAN = fopen("jugadores_plantillas.txt", "r");
-    char c;
-    char *cadena = (char*) malloc(sizeof(char));
-    int contadorChar = 0;
-    Jug_plan *p = (Jug_plan*) malloc(sizeof(Jug_plan));
-    while((c = fgetc(FICHERO_JUG_PLAN))!=EOF){
-        if(c == '\n'){
-            N_JUG_PLANT++;
-            p = (Jug_plan*) realloc(p, N_JUG_PLANT*sizeof(Jug_plan));
-            p[N_JUG_PLANT-1] = obtenerJugPlan(cadena);
-            contadorChar = 0;
-            cadena = (char*) calloc(1, sizeof(char));
-        }else{
-            contadorChar++;
-            cadena = (char*) realloc(cadena, (contadorChar)*sizeof(char));
-            cadena[contadorChar-1] = c;
-        }
-    }
-    N_JUG_PLANT++;
-    p = (Jug_plan*) realloc(p, N_JUG_PLANT*sizeof(Jug_plan));
-    p[N_JUG_PLANT-1] = obtenerJugPlan(cadena);
-    contadorChar = 0;
-    cadena = (char*) calloc(1, sizeof(char));
-    fclose(FICHERO_JUG_PLAN);
-    return p;
-}
 
-Conf* obtenerConfiguraciones(){
-    FILE *FICHERO_CONF = fopen("configuracion.txt", "r");
-    char c;
-    int n = 0;
-    char *cadena = (char*) malloc(sizeof(char));
-    int contadorChar = 0;
-    Conf *p = (Conf*) malloc(sizeof(Conf));
-    while((c = fgetc(FICHERO_CONF))!=EOF){
-        if(c == '\n'){
-            n++;
-            p = (Conf*) realloc(p, n*sizeof(Conf));
-            p[n-1] = obtenerConfiguracion(cadena);
-            contadorChar = 0;
-            cadena = (char*) calloc(1, sizeof(char));
-        }else{
-            contadorChar++;
-            cadena = (char*) realloc(cadena, (contadorChar)*sizeof(char));
-            cadena[contadorChar-1] = c;
-        }
-    }
-    n++;
-    p = (Conf*) realloc(p, n*sizeof(Conf));
-    p[n-1] = obtenerConfiguracion(cadena);
-    contadorChar = 0;
-    cadena = (char*) calloc(1, sizeof(char));
-    fclose(FICHERO_CONF);
-    return p;
-}
-
-void guardarDatosEquipo(Equipo* equipos, int elementos){
-    int i;
-    Equipo e;
-    FILE *FICHERO_EQUIPO = fopen("equipos.txt", "w");
-    for(i = 0; i < elementos; i++){
-        e = equipos[i];
-        if(i == 0){
-            fprintf(FICHERO_EQUIPO, "%s %s", e.codigo, e.nombre);
-        }else{
-            fprintf(FICHERO_EQUIPO, "\n%s %s", e.codigo, e.nombre);
-        }
-
-    }
-    fclose(FICHERO_EQUIPO);
-}
-
-void guardarDatosJugador(Jugador* jugadores, int elementos){
-    int i;
-    Jugador j;
-    FILE *FICHERO_JUGADOR = fopen("futbolistas.txt", "w");
-    for(i = 0; i < elementos; i++){
-        j = jugadores[i];
-        if(i == 0){
-            fprintf(FICHERO_JUGADOR, "%s %s %s %d %d", j.codigo, j.codigo_equipo, j.nombre, j.precio, j.valoracion);
-        }else{
-            fprintf(FICHERO_JUGADOR, "\n%s %s %s %d %d", j.codigo, j.codigo_equipo, j.nombre, j.precio, j.valoracion);
-        }
-    }
-    fclose(FICHERO_JUGADOR);
-}
 
 void guardarDatosUsuario(Usuario* usuarios, int elementos){
     int i;
-    Usuario u;
+    Usuario e;
     FILE *FICHERO_USUARIO = fopen("usuarios.txt", "w");
     for(i = 0; i < elementos; i++){
-        u = usuarios[i];
+        e = usuarios[i];
         if(i == 0){
-            fprintf(FICHERO_USUARIO, "%s %s %s %s %s", u.codigo, u.nombre, u.tipo, u.login, u.pass);
+            fprintf(FICHERO_USUARIO, "%s-%s-%s-%s-%s", e.id_usuario, e.nombre,e.perfil,e.login,e.pass);
         }else{
-            fprintf(FICHERO_USUARIO, "\n%s %s %s %s %s", u.codigo, u.nombre, u.tipo, u.login, u.pass);
+            fprintf(FICHERO_USUARIO, "\n%s-%s-%s-%s-%s", e.id_usuario, e.nombre,e.perfil,e.login,e.pass);
         }
+
     }
     fclose(FICHERO_USUARIO);
 }
 
-void guardarDatosPlantilla(Plantilla* plantillas, int elementos){
+void guardarDatosAlumno(Alumno* alumnos, int elementos){
     int i;
-    Plantilla p;
-    FILE *FICHERO_PLANTILLA = fopen("plantillas.txt", "w");
+    Alumno e;
+    FILE *FICHERO_ALUMNO = fopen("alumnos.txt", "w");
     for(i = 0; i < elementos; i++){
-        p = plantillas[i];
+        e = alumnos[i];
         if(i == 0){
-            fprintf(FICHERO_PLANTILLA, "%s %s %s %d %d", p.codigo_usuario, p.codigo, p.nombre, p.presupuesto, p.puntuacion);
+            fprintf(FICHERO_ALUMNO, "%s-%s-%s-%s-%s-%s", e.id_alumno, e.nombre,e.direccion,e.localidad,e.curso,e.grupo);
         }else{
-            fprintf(FICHERO_PLANTILLA, "\n%s %s %s %d %d", p.codigo_usuario, p.codigo, p.nombre, p.presupuesto, p.puntuacion);
+            fprintf(FICHERO_ALUMNO, "\n%s-%s-%s-%s-%s-%s", e.id_alumno, e.nombre,e.direccion,e.localidad,e.curso,e.grupo);
         }
+
     }
-    fclose(FICHERO_PLANTILLA);
+    fclose(FICHERO_ALUMNO);
 }
 
-void guardarDatosJugadorPlantilla(Jug_plan* jug_plan, int elementos){
+void guardarDatosMateria(Materia* materias, int elementos){
     int i;
-    Jug_plan p;
-    FILE *FICHERO_JUG_PLAN = fopen("jugadores_plantillas.txt", "w");
+    Materia e;
+    FILE *FICHERO_MATERIA = fopen("materias.txt", "w");
     for(i = 0; i < elementos; i++){
-        p = jug_plan[i];
+        e = materias[i];
         if(i == 0){
-            fprintf(FICHERO_JUG_PLAN, "%s %s", p.codigo_jugador, p.codigo_plantilla);
+            fprintf(FICHERO_MATERIA, "%s-%s-%s", e.id_materia,e.nombre,e.abreviatura);
         }else{
-            fprintf(FICHERO_JUG_PLAN, "\n%s %s", p.codigo_jugador, p.codigo_plantilla);
+            fprintf(FICHERO_MATERIA, "\n%s-%s-%s", e.id_materia,e.nombre,e.abreviatura);
         }
     }
-    fclose(FICHERO_JUG_PLAN);
+    fclose(FICHERO_MATERIA);
 }
 
-void guardarDatosConf(Conf* conf, int elementos){
+void guardarDatosMatricula(Matricula* matriculas, int elementos){
     int i;
-    Conf p;
-    FILE *FICHERO_CONF = fopen("configuracion.txt", "w");
+    Matricula e;
+    FILE *FICHERO_MATRICULA = fopen("matriculas.txt", "w");
     for(i = 0; i < elementos; i++){
-        p = conf[i];
+        e = matriculas[i];
         if(i == 0){
-            fprintf(FICHERO_CONF, "%s %s", p.campo, p.valor);
+            fprintf(FICHERO_MATRICULA, "%s-%s", e.id_materia,e.id_alumno);
         }else{
-            fprintf(FICHERO_CONF, "\n%s %s", p.campo, p.valor);
+            fprintf(FICHERO_MATRICULA, "\n%s-%s", e.id_materia,e.id_alumno);
         }
     }
-    fclose(FICHERO_CONF);
+    fclose(FICHERO_MATRICULA);
+}
+
+void guardarDatosCalificaciones(Calificacion* calificaciones, int elementos){
+    int i;
+    Calificacion e;
+    FILE *FICHERO_CALIFICACION = fopen("calificaciones.txt", "w");
+    for(i = 0; i < elementos; i++){
+        e = calificaciones[i];
+        if(i == 0){
+            fprintf(FICHERO_CALIFICACION, "%s-%s-%s-%s-%d", e.fecha,e.descripcion,e.id_materia,e.id_alumno,e.calificacion);
+        }else{
+            fprintf(FICHERO_CALIFICACION, "\n%s-%s-%s-%s-%d", e.fecha,e.descripcion,e.id_materia,e.id_alumno,e.calificacion);
+        }
+    }
+    fclose(FICHERO_MATRICULA);
+}
+
+void guardarDatosFaltas(Falta* faltas, int elementos){
+    int i;
+    Falta e;
+    FILE *FICHERO_FALTA = fopen("faltas.txt", "w");
+    for(i = 0; i < elementos; i++){
+        e = faltas[i];
+        if(i == 0){
+            fprintf(FICHERO_FALTA, "%s-%d-%s-%s-%s", e.fecha,e.hora,e.descripcion,e.estado_falta,e.id_alumno);
+        }else{
+            fprintf(FICHERO_FALTA, "\n%s-%d-%s-%s-%s",e.fecha,e.hora,e.descripcion,e.estado_falta,e.id_alumno);
+        }
+    }
+    fclose(FICHERO_FALTA);
+}
+
+void guardarDatosHorarios(Horario* horarios, int elementos){
+    int i;
+    Horario e;
+    FILE *FICHERO_HORARIO = fopen("horarios.txt", "w");
+    for(i = 0; i < elementos; i++){
+        e = horarios[i];
+        if(i == 0){
+            fprintf(FICHERO_HORARIO, "%s-%d-%d-%s-%s", e.id_profesor,e.dia,e.hora,e.id_materia,e.grupo);
+        }else{
+            fprintf(FICHERO_HORARIO, "\n%s-%d-%d-%s-%s",e.id_profesor,e.dia,e.hora,e.id_materia,e.grupo);
+        }
+    }
+    fclose(FICHERO_HORARIO);
 }
 
 int nUsuarios(){
     return N_USUARIO;
 }
 
-int nEquipos(){
-    return N_EQUIPO;
+int nAlumnos(){
+    return N_ALUMNOS;
 }
 
-int nJugadores(){
-    return N_JUGADOR;
+int nMaterias(){
+    return N_MATERIAS;
 }
 
-int nPlantillas(){
-    return N_PLANTILLA;
+int nMatriculas(){
+    return N_MATRICULAS;
 }
 
-int nJugPlants(){
-    return N_JUG_PLANT;
+int nCalificaciones(){
+    return N_CALIFICACIONES;
+}
+
+int nFaltas(){
+    return N_FALTAS;
 }
