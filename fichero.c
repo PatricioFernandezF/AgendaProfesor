@@ -13,8 +13,24 @@ int N_FALTAS = 0;
 int N_HORARIOS = 0;
 
 Usuario obtenerUsuario(char *cadena){
+
     Usuario u;
-    sscanf(cadena,"%s-%s-%s-%s-%s", u.id_usuario, u.nombre,u.perfil,u.login,u.pass);
+
+    char* guard;
+
+    //sscanf(cadena,"%s-%s-%s-%s-%s", u.id_usuario, u.nombre,u.perfil,u.login,u.pass);
+
+    guard=strtok(cadena,"-");
+    strcpy(u.id_usuario,guard);
+    guard = strtok(NULL, "-");
+    strcpy(u.nombre,guard);
+    guard = strtok(NULL, "-");
+    strcpy(u.perfil,guard);
+    guard = strtok(NULL, "-");
+    strcpy(u.login,guard);
+    guard = strtok(NULL, "-");
+    strcpy(u.pass,guard);
+
     return u;
 }
 
@@ -80,10 +96,14 @@ Usuario loguear(char* logUsuario, char* passUsuario){
 // Poscondicion:
 Usuario* obtenerUsuarios(){
     FILE *FICHERO_USUARIO = fopen("usuarios.txt", "r");
+
+    Usuario *e = (Usuario*) calloc(1,sizeof(Usuario));
+    /*
     char c;
     char *cadena = (char*) calloc(1,sizeof(char));
     int contadorChar = 0;
     Usuario *e = (Usuario*) calloc(1,sizeof(Usuario));
+
     while((c = fgetc(FICHERO_USUARIO))!=EOF){
         if(c == '\n'){
             N_USUARIOS++;
@@ -98,7 +118,41 @@ Usuario* obtenerUsuarios(){
             cadena = (char*) realloc(cadena, (contadorChar)*sizeof(char));
             cadena[contadorChar-1] = c;
         }
+    }*/
+    char *contenido = NULL;
+    int ftam=0;
+    fseek(FICHERO_USUARIO, 0, SEEK_END);
+    ftam = ftell(FICHERO_USUARIO);
+    rewind(FICHERO_USUARIO);
+
+    contenido = (char*) malloc(sizeof(char) * ftam);
+    fread(contenido, 1, ftam, FICHERO_USUARIO);
+
+    char* guard;
+
+    guard=strtok(contenido,"\n");
+
+    N_USUARIOS++;
+    e = (Usuario*) realloc(e, N_USUARIOS*sizeof(Usuario));
+
+    e[N_USUARIOS-1] = obtenerUsuario(guard);
+
+
+    while(guard!=NULL)
+    {
+         guard=strtok(NULL,"\n");
+         if(guard!=NULL)
+         {
+            N_USUARIOS++;
+            e = (Usuario*) realloc(e, N_USUARIOS*sizeof(Usuario));
+            e[N_USUARIOS-1] = obtenerUsuario(guard);
+         }
+
     }
+
+
+
+    /*
     N_USUARIOS++;
     e = (Usuario*) realloc(e, N_USUARIOS*sizeof(Usuario));
     cadena = (char*) realloc(cadena, (contadorChar+1)*sizeof(char));
@@ -106,6 +160,7 @@ Usuario* obtenerUsuarios(){
     e[N_USUARIOS-1] = obtenerUsuario(cadena);
     contadorChar = 0;
     cadena = (char*) calloc(1, sizeof(char));
+    */
     fclose(FICHERO_USUARIO);
     return e;
 }
