@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "fichero.h"
 
+
 int main(){
 
 /*cabecera: void menuMaterias()
@@ -14,40 +15,52 @@ Materia *materia=obtenerMaterias();
 
 do{
     printf("Introduzca la operacion a realizar:\n 1.-Alta Materias.\n 2.-Baja Materias.\n 3.-Modificar Materias.\n 4.-Listar Materias.\n 5.-Salir.\n");
-    scanf("%d",&op);
-    if (op==1) altaMaterias(materia);
-    if (op==2) bajaMaterias(materia);
-    if (op==3) modificarMatriculas(materia);
-    if (op==4) eliminarMatriculas(materia);
+    do{
+        printf("Introduzca la operacion a realizar: \n");
+        scanf("%d",&op);
+        }while(op<1 || op>5);
+        if (op==1) altaMaterias(materia);
+        if (op==2) bajaMaterias(materia);
+        if (op==3) modificarMatriculas(materia);
+        if (op==4) eliminarMatriculas(materia);
 }while(op=!5);
-return 0;
+return;
 }
 
-/*cabecera:
+/*cabecera: void obtenerMaterias()
 precondicion:
 postcondicion:      */
-void obtenerMaterias(){
-fflush(stdin);
+void obtenerMaterias(Materia){
+
+/*strcpy(nuevoMateria.id_materia)
+Materia nuevoMateria;
+nuevoMateria.id_materia="123";
+nuevoMateria.nombre="hola";
+nuevoMateria.abreviatura="abc";*/
 }
-/*cabecera:
+
+/*cabecera: void altaMaterias()
 precondicion:
 postcondicion:      */
-void altaMaterias(materia){
+void altaMaterias(Materia){
 }
-/*cabecera:
+
+/*cabecera: altaMaterias()
 precondicion:
 postcondicion:      */
-void bajaMaterias(materia){
+void bajaMaterias(Materia){
 }
-/*cabecera:
+
+/*cabecera: bajaMaterias()
 precondicion:
 postcondicion:      */
-void modificarMaterias(materia){
+void modificarMaterias(Materia){
 }
-/*cabecera:
+
+/*cabecera: modificarMaterias()
 precondicion:
 postcondicion:      */
-void listarMaterias(materia){
+void listarMaterias(Materia){
 
 
 }

@@ -4,9 +4,9 @@
 #include "fichero.h"
 
 void menuHorarios();
-void anadirHoras(int*);
-void eliminarHoras(int*);
-void modificarHoras(int*);
+void anadirHorarios(Horario*);
+void eliminarHorarios(Horario*);
+void modificarHorarios(Horario*);
 void listarHorarios(Horario*);
 
 #endif // HORARIOS_H_INCLUDED
