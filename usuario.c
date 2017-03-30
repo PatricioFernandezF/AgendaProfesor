@@ -51,7 +51,7 @@ void alta_usuario(Usuario* usuario)
     }while(strlen(cadena)>8);
     strcpy(cadena,newUser.pass);
     
-    printf("\n\nDatos intorucidos en la ficha.\Los datos introducidos son:\n");
+    printf("\n\nDatos intorucidos en la ficha.\nLos datos introducidos son:\n");
     printf("Nombre: %s\n",newUser.nombre);
     printf("Perfil: %s\n",newUser.perfil);
     printf("Login %s\n",newUser.login);
