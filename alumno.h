@@ -3,9 +3,9 @@
 
 #include "fichero.h"
 
-void alta_alumno(Alumno*);
-void baja_alumno(Alumno*);
-void modificar_alumno(Alumno*);
-void listar alumno(Alumno*);
+void alta_alumno(Alumno *lista);
+void baja_alumno(Alumno *lista);
+void modificar_alumno(Alumno *lista);
+void listar_alumno(Alumno *lista);
 
 #endif // ALUMNO_H_INCLUDED

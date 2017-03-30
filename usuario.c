@@ -15,6 +15,23 @@ void menu_usuario();
 // Poscondicion:
 void alta_usuario(Usuario* usuario)
 {
+    int opc=0;
+    
+    Usuario newUser;
+    
+    printf("Introduce el nombre del usuario");
+    fscanf(stdin, "%s", newUser.nombre);
+    printf("Selecciona el tipo de usuario:\n1)Administrador\n2)Profesor\nPerfil:");
+    do{
+        switch(opc){
+            case 1:
+                strcpy("administrador",newUser.perfil);
+                break;
+            case 2:
+                strcpy("profesor",newUser.perfil);
+                break;
+        }
+    }while(opc!=1 || opc!=2);
 }
 // Cabecera: void baja_usuario(Usuario*)
 // Precondicion: Recibe una cadena de caracteres de un usuario.
