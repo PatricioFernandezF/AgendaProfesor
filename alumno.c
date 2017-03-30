@@ -1,4 +1,6 @@
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 #include "alumno.h"
 #include "fichero.h"
 
@@ -12,6 +14,23 @@ void menu_alumno();
 // Poscondicion:
 void alta_alumno(Alumno* alumno)
 {
+    int opc=0;
+    
+    Usuario newUser;
+    
+    printf("Introduce el nombre del usuario");
+    fscanf(stdin, "%s", newUser.nombre);
+    printf("Selecciona el tipo de usuario:\n1)Administrador\n2)Profesor\nPerfil:");
+    do{
+        switch(opc){
+            case 1:
+                strcpy("administrador",newUser.perfil);
+                break;
+            case 2:
+                strcpy("profesor",newUser.perfil);
+                break;
+        }
+    }while(opc!=1 || opc!=2);
 }
 // Cabecera: void baja_usuario(Alumno*)
 // Precondicion: Recibe una cadena de caracteres de un alumno.
@@ -34,9 +53,8 @@ void baja_alumno(Alumno* alumno)
     void menu_alumno()
     {
         int x;
-        Alumno*alumno;
-        do
-        {
+        Alumno *alumno;
+        do{
             printf("Introduzca la opcion que desea\n\n 1: Dar de alta un alumno\n 2: Dar de baja a un alumno\n 3: Modificar un alumno\n 4: Listar un alumno\n 0: salir\n");
             scanf("%d",&x);
             switch (x)
@@ -58,6 +76,6 @@ void baja_alumno(Alumno* alumno)
             default:
                 printf("Error al elegir la opcion.\t");
                 break;
-            }while(x!=0)
-        }
+            }
+        }while(x!=0);
     }
