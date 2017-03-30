@@ -4,8 +4,8 @@
 #include "fichero.h"
 
 /*cabecera: void menuCalificaciones()
-precondición: Ser llamado por el usuario.
-postcondición: Mostrar menu.*/
+precondicion: Ser llamado por el usuario.
+postcondicion: Mostrar menu.*/
 
 void menuCalificaciones(){
     int op;
@@ -14,7 +14,7 @@ void menuCalificaciones(){
         printf("\n 1.- Mostrar Calificaciones.\n 2.- Anadir Calificaciones.\n 3.- Modificar Calificaciones.\n 4.- Eliminar Calificaciones.\n 5.- Salir del Programa.\n");
 
         do{
-            printf("Introduzca la operación a realizar:");
+            printf("Introduzca la operaciï¿½n a realizar:");
             scanf("%d", &op);
         }while(op<1 || op>5);
 
@@ -36,32 +36,32 @@ void menuCalificaciones(){
 }
 
 /*cabecera: void mostrarCalificaciones()
-precondición:
-postcondición: */
+precondicion:
+postcondicion: */
 
 void mostrarCalificaciones(alumno, materia){
 
 }
 
 /*cabecera: void anadirCalificaciones()
-precondición:
-postcondición: */
+precondicion:
+postcondicion: */
 
 void anadirCalificaciones(alumno, materia, int){
 
 }
 
 /*cabecera: void modificarCalificaciones()
-precondición:
-postcondición: */
+precondicion:
+postcondicion: */
 
 void modificarCalificaciones(alumno, materia, int){
 
 }
 
 /*cabecera: void aliminarCalificaciones()
-precondición:
-postcondición: */
+precondicion:
+postcondicion: */
 
 void eliminarCalificaciones(alumno, materia){
 
