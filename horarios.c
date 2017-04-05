@@ -3,13 +3,21 @@
 #include <stdlib.h>
 #include "fichero.h"
 
-int main(){
+
+void anadirHorarios(Horario *horario);
+void eliminarHorarios(Horario *horario);
+void modificarHorarios(Horario *horario);
+void listarHorarios(Horario *horario);
+
+int mainHorarios(){
 
 /*cabecera: void menuHorarios()
 precondición: Ser llamado por el usuario.
 postcondición: Mostrar menu.*/
-void menuCalificaciones(){
+void menuHorarios(){
     int op;
+    Horario* horario;
+
   //  Horarios *horario=obtenerHorarios();
     do{
         printf("\n 1.- Anadir Horarios.\n 2.- Eliminar Horarios.\n 3.- Modificar Horarios.\n 4.- Listar Horarios.\n 5.- Salir del Programa.\n");
@@ -19,7 +27,7 @@ void menuCalificaciones(){
             scanf("%d", &op);
         }while(op<1 || op>5);
 
-/*        switch(op){
+        switch(op){
             case 1: anadirHorarios(horario);
                     break;
             case 2: eliminarHorarios(horario);
@@ -29,7 +37,7 @@ void menuCalificaciones(){
             case 4: listarHorarios(horario);
                     break;
         }
-    */}while(op!=5);
+    }while(op!=5);
     return;
 }
 
@@ -37,7 +45,7 @@ void menuCalificaciones(){
 precondición:
 postcondición: */
 
-void anadirHorarios(Horario){
+void anadirHorarios(Horario* horario){
 
 }
 
@@ -45,7 +53,7 @@ void anadirHorarios(Horario){
 precondición:
 postcondición: */
 
-void eliminarHorarios(Horario){
+void eliminarHorarios(Horario* horario){
 
 }
 
@@ -53,7 +61,7 @@ void eliminarHorarios(Horario){
 precondición:
 postcondición: */
 
-void modificarHorarios(Horario){
+void modificarHorarios(Horario* horario){
 
 }
 
@@ -61,7 +69,7 @@ void modificarHorarios(Horario){
 precondición:
 postcondición: */
 
-void listarHorarios(Horario){
+void listarHorarios(Horario* horario){
 
 }
-}
+return 0;}

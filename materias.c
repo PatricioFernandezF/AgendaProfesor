@@ -3,15 +3,19 @@
 #include <stdlib.h>
 #include "fichero.h"
 
+void altaMaterias(Materia *materia);
+void bajaMaterias(Materia *materia);
+void modificarMaterias(Materia *materia);
+void listarMaterias(Materia *materia);
 
-int main(){
+int mainMaterias(){
 
 /*cabecera: void menuMaterias()
 precondicion: Ser llamado por el usuario
 postcondicion: Mostrar menu.*/
 void menuMaterias(){
 int op;
-Materia *materia=obtenerMaterias();
+Materia *materia;
 
 do{
     printf("Introduzca la operacion a realizar:\n 1.-Alta Materias.\n 2.-Baja Materias.\n 3.-Modificar Materias.\n 4.-Listar Materias.\n 5.-Salir.\n");
@@ -30,7 +34,7 @@ return;
 /*cabecera: void obtenerMaterias()
 precondicion:
 postcondicion:      */
-void obtenerMaterias(Materia){
+void obtenerMaterias(Materia* materia){
 
 /*strcpy(nuevoMateria.id_materia)
 Materia nuevoMateria;
@@ -42,26 +46,26 @@ nuevoMateria.abreviatura="abc";*/
 /*cabecera: void altaMaterias()
 precondicion:
 postcondicion:      */
-void altaMaterias(Materia){
+void altaMaterias(Materia* materia){
 }
 
 /*cabecera: altaMaterias()
 precondicion:
 postcondicion:      */
-void bajaMaterias(Materia){
+void bajaMaterias(Materia* materia){
 }
 
 /*cabecera: bajaMaterias()
 precondicion:
 postcondicion:      */
-void modificarMaterias(Materia){
+void modificarMaterias(Materia* materia){
 }
 
 /*cabecera: modificarMaterias()
 precondicion:
 postcondicion:      */
-void listarMaterias(Materia){
+void listarMaterias(Materia* materia){
 
 
 }
-}
+return 0;}
