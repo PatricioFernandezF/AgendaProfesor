@@ -4,9 +4,9 @@
 #include "fichero.h"
 
 void menuCalificaciones();
-void mostrarCalificaciones(Alumno*, Materia*);
+Calificacion* mostrarCalificaciones(Alumno*, Materia*);
 void anadirCalificaciones(Alumno*, Materia*, int*);
-void modificarCalificaciones(Alumno*, Materia*, int*);
-void eliminarCalificaciones(Alumno*, Materia*);
+void modificarCalificaciones(Alumno*, Materia*, Calificacion*);
+void eliminarCalificaciones(Alumno*, Materia*, Calificacion*);
 
 #endif // CALIFICACIONES_H_INCLUDED
