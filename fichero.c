@@ -3,22 +3,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// CONSTANTES
-int N_USUARIOS = 0;
-int N_ALUMNOS = 0;
-int N_MATERIAS = 0;
-int N_MATRICULAS = 0;
-int N_CALIFICACIONES = 0;
-int N_FALTAS = 0;
-int N_HORARIOS = 0;
 
 Usuario obtenerUsuario(char *cadena){
 
     Usuario u;
 
     char* guard;
-
-    //sscanf(cadena,"%s-%s-%s-%s-%s", u.id_usuario, u.nombre,u.perfil,u.login,u.pass);
 
     guard=strtok(cadena,"-");
     strcpy(u.id_usuario,guard);
@@ -35,38 +25,100 @@ Usuario obtenerUsuario(char *cadena){
 }
 
 Alumno obtenerAlumno(char *cadena){
+
     Alumno a;
-    sscanf(cadena,"%s-%s-%s-%s-%s-%s", a.id_alumno,a.nombre,a.direccion,a.localidad,a.curso,a.grupo);
+    char* guard;
+
+    guard=strtok(cadena,"-");
+    strcpy(a.id_alumno,guard);
+    guard = strtok(NULL, "-");
+    strcpy(a.nombre,guard);
+    guard = strtok(NULL, "-");
+    strcpy(a.direccion,guard);
+    guard = strtok(NULL, "-");
+    strcpy(a.localidad,guard);
+    guard = strtok(NULL, "-");
+    strcpy(a.curso,guard);
+    guard = strtok(NULL, "-");
+    strcpy(a.grupo,guard);
+
     return a;
 }
 
 Materia obtenerMateria(char *cadena){
     Materia m;
     sscanf(cadena,"%s-%s-%s", m.id_materia, m.nombre,m.abreviatura);
+
+    char* guard;
+
+    guard=strtok(cadena,"-");
+    strcpy(m.id_materia,guard);
+    guard = strtok(NULL, "-");
+    strcpy(m.nombre,guard);
+    guard = strtok(NULL, "-");
+    strcpy(m.abreviatura,guard);
+
     return m;
 }
 
 Matricula obtenerMatricula(char* cadena){
     Matricula m;
-    sscanf(cadena,"%s-%s", m.id_materia,m.id_alumno);
+
+    char* guard;
+    guard=strtok(cadena,"-");
+    strcpy(m.id_materia,guard);
+    guard = strtok(NULL, "-");
+    strcpy(m.id_alumno,guard);
+
     return m;
 }
 
 Calificacion obtenerCalificacion(char* cadena){
     Calificacion c;
-    sscanf(cadena,"%s-%s-%s-%s-%s", c.fecha,c.descripcion,c.id_materia,c.id_alumno,c.calificacion);
+    char* guard;
+
+    guard=strtok(cadena,"-");
+    strcpy(c.fecha,guard);
+    guard = strtok(NULL, "-");
+    strcpy(c.descripcion,guard);
+    guard = strtok(NULL, "-");
+    strcpy(c.id_materia,guard);
+    guard = strtok(NULL, "-");
+    strcpy(c.id_alumno,guard);
+    guard = strtok(NULL, "-");
+    strcpy(c.calificacion,guard);
     return c;
 }
 
 Falta obtenerFalta(char* cadena){
     Falta f;
-    sscanf(cadena,"%s-%d-%s-%s-%s", f.fecha,&f.hora,f.descripcion,f.estado_falta,f.id_alumno);
+    char* guard;
+    guard=strtok(cadena,"-");
+    strcpy(f.fecha,guard);
+    guard = strtok(NULL, "-");
+    strcpy(f.hora,guard);
+    guard = strtok(NULL, "-");
+    strcpy(f.descripcion,guard);
+    guard = strtok(NULL, "-");
+    strcpy(f.estado_falta,guard);
+    guard = strtok(NULL, "-");
+    strcpy(f.id_alumno,guard);
     return f;
 }
 
 Horario obtenerHorario(char* cadena){
     Horario h;
-    sscanf(cadena,"%s-%d-%d-%s-%s", h.id_profesor,&h.dia,&h.hora,h.id_materia,h.grupo);
+    char* guard;
+    guard=strtok(cadena,"-");
+    strcpy(h.id_profesor,guard);
+    guard = strtok(NULL, "-");
+    strcpy(h.dia,guard);
+    guard = strtok(NULL, "-");
+    strcpy(h.hora,guard);
+    guard = strtok(NULL, "-");
+    strcpy(h.id_materia,guard);
+    guard = strtok(NULL, "-");
+    strcpy(h.grupo,guard);
     return h;
 }
 // FUNCIONES PUBLICAS
@@ -94,255 +146,374 @@ Usuario loguear(char* logUsuario, char* passUsuario){
 // Cabecera: Usuario* obtenerUsuarios()
 // Precondicion:
 // Poscondicion:
-Usuario* obtenerUsuarios(){
-    FILE *FICHERO_USUARIO = fopen("usuarios.txt", "r");
-
+Usuario* obtenerUsuarios(int *n){
+    FILE *FICHERO_USUARIO;
+    *n=0;
     Usuario *e = (Usuario*) calloc(1,sizeof(Usuario));
-
-    char *contenido = NULL;
-    int ftam=0;
-    fseek(FICHERO_USUARIO, 0, SEEK_END);
-    ftam = ftell(FICHERO_USUARIO);
-    rewind(FICHERO_USUARIO);
-
-    contenido = (char*) malloc(sizeof(char) * ftam);
-    fread(contenido, 1, ftam, FICHERO_USUARIO);
-
-    //AUX ALMACENA TODAS LAS LINEAS
-    char** aux= (char**) malloc(sizeof(char**) * 1);
-    //Guard almacena una linea
-    char* guard;
-
-    guard=strtok(contenido,"\n");
-    aux[N_USUARIOS] = (char*) malloc(sizeof(char) * 200);
-    strcpy(aux[N_USUARIOS],guard);
-    N_USUARIOS++;
-    e = (Usuario*) realloc(e, N_USUARIOS*sizeof(Usuario));
-
-    while(guard!=NULL)
+    if(FICHERO_USUARIO = fopen("usuarios.txt", "r"))
     {
-         guard=strtok(NULL,"\n");
-         if(guard!=NULL)
-         {
-            aux[N_USUARIOS] = (char*) malloc(sizeof(char) * 200);
-            strcpy(aux[N_USUARIOS],guard);
-            N_USUARIOS++;
-         }
+        char *contenido = NULL;
+        int ftam=0;
+        fseek(FICHERO_USUARIO, 0, SEEK_END);
+        ftam = ftell(FICHERO_USUARIO);
+        rewind(FICHERO_USUARIO);
+
+        contenido = (char*) malloc(sizeof(char) * ftam);
+        fread(contenido, 1, ftam, FICHERO_USUARIO);
+
+        //AUX ALMACENA TODAS LAS LINEAS
+        char** aux= (char**) malloc(sizeof(char**) * 1);
+        //Guard almacena una linea
+        char* guard;
+
+        guard=strtok(contenido,"\n");
+        aux[*n] = (char*) malloc(sizeof(char) * 200);
+        strcpy(aux[*n],guard);
+        ++*n;
+        e = (Usuario*) realloc(e, *n*sizeof(Usuario));
+
+        while(guard!=NULL)
+        {
+            guard=strtok(NULL,"\n");
+            if(guard!=NULL)
+            {
+                aux[*n] = (char*) malloc(sizeof(char) * 200);
+                strcpy(aux[*n],guard);
+                ++*n;
+            }
+        }
+
+
+        int i;
+        for(i=0;i<*n;i++)
+        {
+            e = (Usuario*) realloc(e, *n*sizeof(Usuario));
+            e[i] = obtenerUsuario(aux[i]);
+        }
+
+        fclose(FICHERO_USUARIO);
     }
 
-    int i;
-    for(i=0;i<N_USUARIOS-1;i++)
-    {
-        e = (Usuario*) realloc(e, N_USUARIOS*sizeof(Usuario));
-        e[i] = obtenerUsuario(aux[i]);
-    }
-
-    fclose(FICHERO_USUARIO);
     return e;
 }
 
 // Cabecera: Alumno* obtenerAlumnos()
 // Precondicion:
 // Poscondicion:
-Alumno* obtenerAlumnos(){
-    FILE *FICHERO_ALUMNO = fopen("alumnos.txt", "r");
-    char c;
-    char *cadena = (char*) malloc(sizeof(char));
-    int contadorChar = 0;
-    Alumno *j = (Alumno*) malloc(sizeof(Alumno));
-    while((c = fgetc(FICHERO_ALUMNO))!=EOF){
-        if(c == '\n'){
-            N_ALUMNOS++;
-            j = (Alumno*) realloc(j, N_ALUMNOS*sizeof(Alumno));
-            j[N_ALUMNOS-1] = obtenerAlumno(cadena);
-            contadorChar = 0;
-            cadena = (char*) calloc(1, sizeof(char));
-        }else{
-            contadorChar++;
-            cadena = (char*) realloc(cadena, (contadorChar)*sizeof(char));
-            cadena[contadorChar-1] = c;
+Alumno* obtenerAlumnos(int *n){
+    FILE *FICHERO_ALUMNO;
+    *n=0;
+    Alumno *e = (Alumno*) calloc(1,sizeof(Alumno));
+
+    if(FICHERO_ALUMNO = fopen("alumnos.txt", "r"))
+    {
+        char *contenido = NULL;
+        int ftam=0;
+        fseek(FICHERO_ALUMNO, 0, SEEK_END);
+        ftam = ftell(FICHERO_ALUMNO);
+        rewind(FICHERO_ALUMNO);
+
+        contenido = (char*) malloc(sizeof(char) * ftam);
+        fread(contenido, 1, ftam, FICHERO_ALUMNO);
+
+        //AUX ALMACENA TODAS LAS LINEAS
+        char** aux= (char**) malloc(sizeof(char**) * 1000000);
+        //Guard almacena una linea
+        char* guard;
+
+        guard=strtok(contenido,"\n");
+        aux[*n] = (char*) malloc(sizeof(char) * 200);
+        strcpy(aux[*n],guard);
+        ++*n;
+        e = (Alumno*) realloc(e, *n*sizeof(Alumno));
+
+        while(guard!=NULL)
+        {
+            guard=strtok(NULL,"\n");
+            if(guard!=NULL)
+            {
+                aux[*n] = (char*) malloc(sizeof(char) * 200);
+                strcpy(aux[*n],guard);
+                ++*n;
+            }
         }
+
+
+        int i;
+        for(i=0;i<*n;i++)
+        {
+            e = (Alumno*) realloc(e, *n*sizeof(Alumno));
+            e[i] = obtenerAlumno(aux[i]);
+        }
+
+        fclose(FICHERO_ALUMNO);
     }
-    N_ALUMNOS++;
-    j = (Alumno*) realloc(j, N_ALUMNOS*sizeof(Alumno));
-    j[N_ALUMNOS-1] = obtenerAlumno(cadena);
-    contadorChar = 0;
-    cadena = (char*) calloc(1, sizeof(char));
-    fclose(FICHERO_ALUMNO);
-    return j;
+
+
+    return e;
 }
 
 // Cabecera: Usuario* obtenerUsuarios()
 // Precondicion:
 // Poscondicion:
-Materia* obtenerMaterias(){
-    FILE *FICHERO_MATERIA = fopen("materias.txt", "r");
-    char c;
-    char *cadena = (char*) malloc(sizeof(char));
-    int contadorChar = 0;
-    Materia *u = (Materia*) malloc(sizeof(Materia));
-    while((c = fgetc(FICHERO_MATERIA))!=EOF){
-        if(c == '\n'){
-            N_MATERIAS++;
-            u = (Materia*) realloc(u, N_MATERIAS*sizeof(Materia));
-            u[N_MATERIAS-1] = obtenerMateria(cadena);
-            contadorChar = 0;
-            cadena = (char*) calloc(1, sizeof(char));
-        }else{
-            contadorChar++;
-            cadena = (char*) realloc(cadena, (contadorChar)*sizeof(char));
-            cadena[contadorChar-1] = c;
-        }
-    }
-    N_MATERIAS++;
-    u = (Materia*) realloc(u, N_MATERIAS*sizeof(Materia));
-    u[N_MATERIAS-1] = obtenerMateria(cadena);
-    contadorChar = 0;
-    cadena = (char*) calloc(1, sizeof(char));
-    fclose(FICHERO_MATERIA);
-    return u;
-}
+Materia* obtenerMaterias(int *n){
+    FILE *FICHERO_MATERIA;
+    *n=0;
+    Materia *e = (Materia*) calloc(1,sizeof(Materia));
+    if(FICHERO_MATERIA = fopen("materias.txt", "r"))
+    {
 
-// Cabecera: Plantilla* obtenerPlantillas()
+        char *contenido = NULL;
+        int ftam=0;
+        fseek(FICHERO_MATERIA, 0, SEEK_END);
+        ftam = ftell(FICHERO_MATERIA);
+        rewind(FICHERO_MATERIA);
+
+        contenido = (char*) malloc(sizeof(char) * ftam);
+        fread(contenido, 1, ftam, FICHERO_MATERIA);
+
+        //AUX ALMACENA TODAS LAS LINEAS
+        char** aux= (char**) malloc(sizeof(char**) * 200);
+        //Guard almacena una linea
+        char* guard;
+
+        guard=strtok(contenido,"\n");
+        aux[*n] = (char*) malloc(sizeof(char) * 200);
+        strcpy(aux[*n],guard);
+        ++*n;
+        e = (Materia*) realloc(e, *n*sizeof(Materia));
+
+        while(guard!=NULL)
+        {
+            guard=strtok(NULL,"\n");
+            if(guard!=NULL)
+            {
+                aux[*n] = (char*) malloc(sizeof(char) * 200);
+                strcpy(aux[*n],guard);
+                ++*n;
+            }
+        }
+
+        int i;
+        for(i=0;i<*n;i++)
+        {
+            e = (Materia*) realloc(e, *n*sizeof(Materia));
+            e[i] = obtenerMateria(aux[i]);
+        }
+
+        fclose(FICHERO_MATERIA);
+    }
+
+
+    return e;
+}
+// Cabecera: Plantilla* obtenerMatriculas()
 // Precondicion:
 // Poscondicion:
-Matricula* obtenerMatriculas(){
-    FILE *FICHERO_MATRICULA = fopen("matriculas.txt", "r");
-    char c;
-    char *cadena = (char*) calloc(1,sizeof(char));
-    int contadorChar = 0;
-    Matricula *p = (Matricula*) calloc(1,sizeof(Matricula));
-    while((c = fgetc(FICHERO_MATRICULA))!=EOF){
-        if(c == '\n'){
-            N_MATRICULAS++;
-            p = (Matricula*) realloc(p, N_MATRICULAS*sizeof(Matricula));
-            cadena = (char*) realloc(cadena, (contadorChar+1)*sizeof(char));
-            cadena[contadorChar] = '\0';
-            p[N_MATRICULAS-1] = obtenerMatricula(cadena);
-            contadorChar = 0;
-            cadena = (char*) calloc(1, sizeof(char));
-        }else{
-            contadorChar++;
-            cadena = (char*) realloc(cadena, (contadorChar)*sizeof(char));
-            cadena[contadorChar-1] = c;
-        }
-    }
-    N_MATRICULAS++;
-    p = (Materia*) realloc(p, N_MATRICULAS*sizeof(Matricula));
-    cadena = (char*) realloc(cadena, (contadorChar+1)*sizeof(char));
-    cadena[contadorChar] = '\0';
-    p[N_MATRICULAS-1] = obtenerMatricula(cadena);
-    contadorChar = 0;
-    cadena = (char*) calloc(1, sizeof(char));
-    fclose(FICHERO_MATRICULA);
-    return p;
-}
+Matricula* obtenerMatriculas(int *n){
+    FILE *FICHERO_MATRICULA;
+    *n=0;
+    Matricula *e = (Matricula*) calloc(1,sizeof(Matricula));
+    if(FICHERO_MATRICULA = fopen("matriculas.txt", "r"))
+    {
 
-// Cabecera: Plantilla* obtenerPlantillas()
+        char *contenido = NULL;
+        int ftam=0;
+        fseek(FICHERO_MATRICULA, 0, SEEK_END);
+        ftam = ftell(FICHERO_MATRICULA);
+        rewind(FICHERO_MATRICULA);
+
+        contenido = (char*) malloc(sizeof(char) * ftam);
+        fread(contenido, 1, ftam, FICHERO_MATRICULA);
+
+        //AUX ALMACENA TODAS LAS LINEAS
+        char** aux= (char**) malloc(sizeof(char**) * 200);
+        //Guard almacena una linea
+        char* guard;
+
+        guard=strtok(contenido,"\n");
+        aux[*n] = (char*) malloc(sizeof(char) * 200);
+        strcpy(aux[*n],guard);
+        ++*n;
+        e = (Matricula*) realloc(e, *n*sizeof(Matricula));
+
+        while(guard!=NULL)
+        {
+            guard=strtok(NULL,"\n");
+            if(guard!=NULL)
+            {
+                aux[*n] = (char*) malloc(sizeof(char) * 200);
+                strcpy(aux[*n],guard);
+                ++*n;
+            }
+        }
+
+        int i;
+        for(i=0;i<*n;i++)
+        {
+            e = (Matricula*) realloc(e, *n*sizeof(Matricula));
+            e[i] = obtenerMatricula(aux[i]);
+        }
+
+        fclose(FICHERO_MATRICULA);
+    }
+
+
+    return e;
+}
+// Cabecera: Plantilla* obtenerCalificaciones()
 // Precondicion:
 // Poscondicion:
-Calificacion* obtenerCalificaciones(){
-    FILE *FICHERO_CALIFICACIONES = fopen("calificaciones.txt", "r");
-    char c;
-    char *cadena = (char*) calloc(1,sizeof(char));
-    int contadorChar = 0;
-    Calificacion *p = (Calificacion*) calloc(1,sizeof(Calificacion));
-    while((c = fgetc(FICHERO_CALIFICACIONES))!=EOF){
-        if(c == '\n'){
-            N_CALIFICACIONES++;
-            p = (Calificacion*) realloc(p, N_CALIFICACIONES*sizeof(Calificacion));
-            cadena = (char*) realloc(cadena, (contadorChar+1)*sizeof(char));
-            cadena[contadorChar] = '\0';
-            p[N_CALIFICACIONES-1] = obtenerCalificacion(cadena);
-            contadorChar = 0;
-            cadena = (char*) calloc(1, sizeof(char));
-        }else{
-            contadorChar++;
-            cadena = (char*) realloc(cadena, (contadorChar)*sizeof(char));
-            cadena[contadorChar-1] = c;
+Calificacion* obtenerCalificaciones(int *n){
+    FILE *FICHERO_CALIFICACIONES;
+    *n=0;
+    Calificacion *e = (Calificacion*) calloc(1,sizeof(Calificacion));
+    if(FICHERO_CALIFICACIONES = fopen("calificaciones.txt", "r"))
+    {
+
+        char *contenido = NULL;
+        int ftam=0;
+        fseek(FICHERO_CALIFICACIONES, 0, SEEK_END);
+        ftam = ftell(FICHERO_CALIFICACIONES);
+        rewind(FICHERO_CALIFICACIONES);
+
+        contenido = (char*) malloc(sizeof(char) * ftam);
+        fread(contenido, 1, ftam, FICHERO_CALIFICACIONES);
+
+        //AUX ALMACENA TODAS LAS LINEAS
+        char** aux= (char**) malloc(sizeof(char**) * 200);
+        //Guard almacena una linea
+        char* guard;
+
+        guard=strtok(contenido,"\n");
+        aux[*n] = (char*) malloc(sizeof(char) * 200);
+        strcpy(aux[*n],guard);
+        ++*n;
+        e = (Calificacion*) realloc(e, *n*sizeof(Calificacion));
+
+        while(guard!=NULL)
+        {
+            guard=strtok(NULL,"\n");
+            if(guard!=NULL)
+            {
+                aux[*n] = (char*) malloc(sizeof(char) * 200);
+                strcpy(aux[*n],guard);
+                ++*n;
+            }
         }
+
+        int i;
+        for(i=0;i<*n;i++)
+        {
+            e = (Calificacion*) realloc(e, *n*sizeof(Calificacion));
+            e[i] = obtenerCalificacion(aux[i]);
+        }
+        fclose(FICHERO_CALIFICACIONES);
     }
-    N_CALIFICACIONES++;
-    p = (Calificacion*) realloc(p, N_CALIFICACIONES*sizeof(Calificacion));
-    cadena = (char*) realloc(cadena, (contadorChar+1)*sizeof(char));
-    cadena[contadorChar] = '\0';
-    p[N_CALIFICACIONES-1] = obtenerCalificacion(cadena);
-    contadorChar = 0;
-    cadena = (char*) calloc(1, sizeof(char));
-    fclose(FICHERO_CALIFICACIONES);
-    return p;
+    return e;
 }
 
 // Cabecera: Falta* obtenerFaltas()
 // Precondicion:
 // Poscondicion:
-Falta* obtenerFaltas(){
-    FILE *FICHERO_FALTAS = fopen("faltas.txt", "r");
-    char c;
-    char *cadena = (char*) calloc(1,sizeof(char));
-    int contadorChar = 0;
-    Falta *p = (Falta*) calloc(1,sizeof(Falta));
-    while((c = fgetc(FICHERO_FALTAS))!=EOF){
-        if(c == '\n'){
-            N_FALTAS++;
-            p = (Falta*) realloc(p, N_FALTAS*sizeof(Falta));
-            cadena = (char*) realloc(cadena, (contadorChar+1)*sizeof(char));
-            cadena[contadorChar] = '\0';
-            p[N_FALTAS-1] = obtenerFalta(cadena);
-            contadorChar = 0;
-            cadena = (char*) calloc(1, sizeof(char));
-        }else{
-            contadorChar++;
-            cadena = (char*) realloc(cadena, (contadorChar)*sizeof(char));
-            cadena[contadorChar-1] = c;
+Falta* obtenerFaltas(int *n){
+    FILE *FICHERO_FALTAS;
+    *n=0;
+    Falta *e = (Falta*) calloc(1,sizeof(Falta));
+    if(FICHERO_FALTAS = fopen("materias.txt", "r"))
+    {
+        char *contenido = NULL;
+        int ftam=0;
+        fseek(FICHERO_FALTAS, 0, SEEK_END);
+        ftam = ftell(FICHERO_FALTAS);
+        rewind(FICHERO_FALTAS);
+
+        contenido = (char*) malloc(sizeof(char) * ftam);
+        fread(contenido, 1, ftam, FICHERO_FALTAS);
+
+        //AUX ALMACENA TODAS LAS LINEAS
+        char** aux= (char**) malloc(sizeof(char**) * 10000000);
+        //Guard almacena una linea
+        char* guard;
+
+        guard=strtok(contenido,"\n");
+        aux[*n] = (char*) malloc(sizeof(char) * 200);
+        strcpy(aux[*n],guard);
+        ++*n;
+        e = (Falta*) realloc(e, *n*sizeof(Falta));
+
+        while(guard!=NULL)
+        {
+            guard=strtok(NULL,"\n");
+            if(guard!=NULL)
+            {
+                aux[*n] = (char*) malloc(sizeof(char) * 200);
+                strcpy(aux[*n],guard);
+                ++*n;
+            }
         }
+
+        int i;
+        for(i=0;i<*n;i++)
+        {
+            e = (Falta*) realloc(e, *n*sizeof(Falta));
+            e[i] = obtenerFalta(aux[i]);
+        }
+        fclose(FICHERO_FALTAS);
     }
-    N_FALTAS++;
-    p = (Falta*) realloc(p, N_FALTAS*sizeof(Falta));
-    cadena = (char*) realloc(cadena, (contadorChar+1)*sizeof(char));
-    cadena[contadorChar] = '\0';
-    p[N_FALTAS-1] = obtenerFalta(cadena);
-    contadorChar = 0;
-    cadena = (char*) calloc(1, sizeof(char));
-    fclose(FICHERO_FALTAS);
-    return p;
+    return e;
 }
 
 // Cabecera: Horario* obtenerHorarios()
 // Precondicion:
 // Poscondicion:
-Horario* obtenerHorarios(){
-    FILE *FICHERO_HORARIO = fopen("horarios.txt", "r");
-    char c;
-    char *cadena = (char*) calloc(1,sizeof(char));
-    int contadorChar = 0;
-    Horario *p = (Horario*) calloc(1,sizeof(Horario));
-    while((c = fgetc(FICHERO_HORARIO))!=EOF){
-        if(c == '\n'){
-            N_HORARIOS++;
-            p = (Horario*) realloc(p, N_HORARIOS*sizeof(Horario));
-            cadena = (char*) realloc(cadena, (contadorChar+1)*sizeof(char));
-            cadena[contadorChar] = '\0';
-            p[N_HORARIOS-1] = obtenerHorario(cadena);
-            contadorChar = 0;
-            cadena = (char*) calloc(1, sizeof(char));
-        }else{
-            contadorChar++;
-            cadena = (char*) realloc(cadena, (contadorChar)*sizeof(char));
-            cadena[contadorChar-1] = c;
-        }
-    }
-    N_HORARIOS++;
-    p = (Horario*) realloc(p, N_HORARIOS*sizeof(Horario));
-    cadena = (char*) realloc(cadena, (contadorChar+1)*sizeof(char));
-    cadena[contadorChar] = '\0';
-    p[N_HORARIOS-1] = obtenerHorario(cadena);
-    contadorChar = 0;
-    cadena = (char*) calloc(1, sizeof(char));
-    fclose(FICHERO_HORARIO);
-    return p;
-}
+Horario* obtenerHorarios(int *n){
+    FILE *FICHERO_HORARIOS;
+    *n=0;
+    Horario *e = (Horario*) calloc(1,sizeof(Horario));
+    if(FICHERO_HORARIOS = fopen("horarios.txt", "r"))
+    {
+        char *contenido = NULL;
+        int ftam=0;
+        fseek(FICHERO_HORARIOS, 0, SEEK_END);
+        ftam = ftell(FICHERO_HORARIOS);
+        rewind(FICHERO_HORARIOS);
 
+        contenido = (char*) malloc(sizeof(char) * ftam);
+        fread(contenido, 1, ftam, FICHERO_HORARIOS);
+
+        //AUX ALMACENA TODAS LAS LINEAS
+        char** aux= (char**) malloc(sizeof(char**) * 200);
+        //Guard almacena una linea
+        char* guard;
+
+        guard=strtok(contenido,"\n");
+        aux[*n] = (char*) malloc(sizeof(char) * 200);
+        strcpy(aux[*n],guard);
+        ++*n;
+        e = (Horario*) realloc(e, *n*sizeof(Horario));
+
+        while(guard!=NULL)
+        {
+            guard=strtok(NULL,"\n");
+            if(guard!=NULL)
+            {
+                aux[*n] = (char*) malloc(sizeof(char) * 200);
+                strcpy(aux[*n],guard);
+                ++*n;
+            }
+        }
+
+        int i;
+        for(i=0;i<*n;i++)
+        {
+            e = (Horario*) realloc(e, *n*sizeof(Horario));
+            e[i] = obtenerHorario(aux[i]);
+        }
+        fclose(FICHERO_HORARIOS);
+    }
+    return e;
+}
 
 void guardarDatosUsuario(Usuario* usuarios, int elementos){
     int i;
@@ -451,26 +622,4 @@ void guardarDatosHorarios(Horario* horarios, int elementos){
     fclose(FICHERO_HORARIO);
 }
 
-int nUsuarios(){
-    return N_USUARIOS;
-}
 
-int nAlumnos(){
-    return N_ALUMNOS;
-}
-
-int nMaterias(){
-    return N_MATERIAS;
-}
-
-int nMatriculas(){
-    return N_MATRICULAS;
-}
-
-int nCalificaciones(){
-    return N_CALIFICACIONES;
-}
-
-int nFaltas(){
-    return N_FALTAS;
-}

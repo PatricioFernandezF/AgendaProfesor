@@ -40,7 +40,7 @@ typedef struct{
 
 typedef struct{
     char fecha[10];
-    int hora;
+    char hora[10];
     char descripcion[31];
     char estado_falta[17];
     char id_alumno[7];
@@ -48,8 +48,8 @@ typedef struct{
 
 typedef struct{
     char id_profesor[4];
-    int dia;
-    int hora;
+    char dia[3];
+    char hora[10];
     char id_materia[5];
     char grupo[11];
 }Horario;
@@ -57,20 +57,14 @@ typedef struct{
 
 //Funciones
 
-Usuario* obtenerUsuarios();
-Alumno* obtenerAlumnos();
-Materia* obtenerMaterias();
-Matricula* obtenerMatriculas();
-Calificacion* obtenerCalificaciones();
-Falta* obtenerFaltas();
-Horario* obtenerHorarios();
+Usuario* obtenerUsuarios(int *n);
+Alumno* obtenerAlumnos(int *n);
+Materia* obtenerMaterias(int *n);
+Matricula* obtenerMatriculas(int *n);
+Calificacion* obtenerCalificaciones(int *n);
+Falta* obtenerFaltas(int *n);
+Horario* obtenerHorarios(int *n);
 Usuario loguear(char* logUsuario, char* passUsuario);
-int nUsuarios();
-int nAlumnos();
-int nMaterias();
-int nMatriculas();
-int nCalificaciones();
-int nFaltas();
 
 
 #endif	/* FICHERO_H */
