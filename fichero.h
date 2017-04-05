@@ -65,6 +65,11 @@ Calificacion* obtenerCalificaciones(int *n);
 Falta* obtenerFaltas(int *n);
 Horario* obtenerHorarios(int *n);
 Usuario loguear(char* logUsuario, char* passUsuario);
-
+void guardarDatosAlumno(Alumno* alumnos, int elementos);
+void guardarDatosMateria(Materia* materias, int elementos);
+void guardarDatosMatricula(Matricula* matriculas, int elementos);
+void guardarDatosCalificaciones(Calificacion* calificaciones, int elementos);
+void guardarDatosFaltas(Falta* faltas, int elementos);
+void guardarDatosHorarios(Horario* horarios, int elementos);
 
 #endif	/* FICHERO_H */
