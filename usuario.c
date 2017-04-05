@@ -13,19 +13,15 @@ void menu_usuario();
 // Cabecera: void alta_usuario(Usuario*)
 // Precondicion: Recibe una cadena de caracteres de un usuario.
 // Poscondicion:
-void alta_usuario(Usuario* usuario)
+void alta_usuario(Usuario *usuario)
 {
     int opc=0;
     
     Usuario newUser;
-    char    cadena[50]; 
     
     printf("Introduce el nombre del usuario (20 cáracteres):");
-    do{
-        fscanf(stdin, "%s", cadena);
-    }while(strlen(cadena)>20);
-    strcpy(cadena,newUser.nombre);
-    
+    fgets (newUser.nombre, 21, stdin);
+     
     printf("Selecciona el tipo de usuario:\n1)Administrador\n2)Profesor\nPerfil:");
     do{
         switch(opc){
@@ -40,16 +36,10 @@ void alta_usuario(Usuario* usuario)
         }
     }while(opc!=1 || opc!=2);
     printf("Introduce un nombre de usuario (5 cáracteres):");
-    do{
-        fscanf(stdin, "%s", cadena);
-    }while(strlen(cadena)>5);
-    strcpy(cadena,newUser.login);
+    fgets (newUser.login, 6, stdin);
     
     printf("Introduce una contraseña (8 cáracteres):");
-    do{
-        fscanf(stdin, "%s", cadena);
-    }while(strlen(cadena)>8);
-    strcpy(cadena,newUser.pass);
+    fgets (newUser.pass, 9, stdin);
     
     printf("\n\nDatos intorucidos en la ficha.\nLos datos introducidos son:\n");
     printf("Nombre: %s\n",newUser.nombre);
@@ -65,7 +55,7 @@ void alta_usuario(Usuario* usuario)
 // Cabecera: void baja_usuario(Usuario*)
 // Precondicion: Recibe una cadena de caracteres de un usuario.
 // Poscondicion:
-void baja_usuario(Usuario* usuario)
+void baja_usuario(Usuario *usuario)
 {
     int num;
     
@@ -77,7 +67,7 @@ void baja_usuario(Usuario* usuario)
 // Cabecera: void modificar_usuario(Usuario*)
 // Precondicion: Recibe una cadena de caracteres de un usuario.
 // Poscondicion:
-void modificar_usuario(Usuario* usuario)
+void modificar_usuario(Usuario *usuario)
 {
     int numUser, numOpc, opc;
     char cadena[50];
@@ -93,10 +83,7 @@ void modificar_usuario(Usuario* usuario)
         switch(numOpc){
             case 1:
                 printf("Introduce el nombre del usuario (20 cáracteres):");
-                do{
-                    fscanf(stdin, "%s", cadena);
-                }while(strlen(cadena)>20);
-                strcpy(cadena,newUser.nombre);
+                fgets (newUser.nombre, 21, stdin);
                 break;
 
             case 2:
@@ -111,22 +98,16 @@ void modificar_usuario(Usuario* usuario)
                             break;
                     }
                 }while(opc!=1 || opc!=2);
-                printf("Introduce un nombre de usuario (5 cáracteres):");
                 break;
 
             case 3:
-                do{
-                    fscanf(stdin, "%s", cadena);
-                }while(strlen(cadena)>5);
-                strcpy(cadena,newUser.login);
+                printf("Introduce un nombre de usuario (5 cáracteres):");
+                fgets (newUser.login, 6, stdin);
                 break;
 
             case 4:
                 printf("Introduce una contraseña (8 cáracteres):");
-                do{
-                    fscanf(stdin, "%s", cadena);
-                }while(strlen(cadena)>8);
-                strcpy(cadena,newUser.pass);
+                fgets (newUser.pass, 9, stdin);
                 break;
             
             default:
@@ -138,8 +119,9 @@ void modificar_usuario(Usuario* usuario)
 // Cabecera: void listar_usuario(Usuario*)
 // Precondicion: Recibe una cadena de caracteres de un usuario.
 // Poscondicion:
-void listar_usuario(Usuario* usuario)
+void listar_usuario(Usuario *usuario)
 {
+    int i;
     
 }
 // Cabecera: void menu_usuario()
