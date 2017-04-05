@@ -28,44 +28,64 @@ do{
         if (op==3) modificarMatriculas(materia);
         if (op==4) eliminarMatriculas(materia);
 }while(op=!5);
-return;
 }
-
-/*cabecera: void obtenerMaterias()
-precondicion:
-postcondicion:      */
-void obtenerMaterias(Materia* materia){
-
-/*strcpy(nuevoMateria.id_materia)
-Materia nuevoMateria;
-nuevoMateria.id_materia="123";
-nuevoMateria.nombre="hola";
-nuevoMateria.abreviatura="abc";*/
-}
+return 0;}
 
 /*cabecera: void altaMaterias()
 precondicion:
 postcondicion:      */
 void altaMaterias(Materia* materia){
+
+Materia mat;
+mat.nombre;
+mat.abreviatura;
+
+printf("Indique el nombre de la materia a dar de alta: \n");
+    fgets(mat.id_mat, 51, stdin);
+
+printf("Indique la abreviatura de la materia: \n");
+    fgets(mat.abreviatura, 4, stdin);
+
 }
 
 /*cabecera: altaMaterias()
 precondicion:
 postcondicion:      */
 void bajaMaterias(Materia* materia){
+Materia mat;
+mat.nombre;
+
+listarMaterias();
+printf("Indique el nombre de la materia a dar de baja: \n");
+fgets(mat.id_mat, 51, stdin);
+
 }
 
 /*cabecera: bajaMaterias()
 precondicion:
 postcondicion:      */
 void modificarMaterias(Materia* materia){
+Materia mat;
+mat.nombre;
+mat.abreviatura;
+
+listarMaterias();
+printf("Indique el nombre de la materia a modificar: \n");
+    fgets(mat.id_mat, 51, stdin);
+
+printf("Indique la abreviatura de la materia: \n");
+    fgets(mat.abreviatura, 4, stdin);
 }
 
 /*cabecera: modificarMaterias()
 precondicion:
 postcondicion:      */
 void listarMaterias(Materia* materia){
+Materia mat;
+mat.nombre;
+mat.abreviatura;
+
 
 
 }
-return 0;}
+

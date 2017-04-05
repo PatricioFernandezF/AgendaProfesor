@@ -38,15 +38,35 @@ void menuHorarios(){
                     break;
         }
     }while(op!=5);
-    return;
 }
+return;}
 
 /*cabecera: void anadirHorarios()
 precondición:
 postcondición: */
 
 void anadirHorarios(Horario* horario){
+Horario hor;
+hor.dia;
+hor.hora;
+hor.id_materia;
+hor.grupo;
+hor.id_profesor;
 
+printf("Introduzca el dia: \n");
+    fgets(hor.dia, , stdin);
+
+printf("Introduzca la hora: \n");
+    fgets(hor.hora, , stdin);
+
+printf("Introduzca el profesor para esa hora: \n");
+    fgets(hor.id_profesor, 4, stdin);
+
+printf("Introduzca la materia para esa hora: \n");
+    fgets(hor.materia, 5, stdin);
+
+printf("Introduzca el grupo de clase: \n");
+    fgets(hor.grupo, 11, stdin);
 }
 
 /*cabecera: void eliminarHorarios()
@@ -54,6 +74,8 @@ precondición:
 postcondición: */
 
 void eliminarHorarios(Horario* horario){
+listarHorarios();
+printf("Introduzca el dia: \n");
 
 }
 
