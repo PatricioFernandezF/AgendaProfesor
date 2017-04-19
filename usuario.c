@@ -22,8 +22,10 @@ void alta_usuario(Usuario *usuario)
     printf("Introduce el nombre del usuario (20 cáracteres):");
     fgets (newUser.nombre, 21, stdin);
      
-    printf("Selecciona el tipo de usuario:\n1)Administrador\n2)Profesor\nPerfil:");
     do{
+        printf("Selecciona el tipo de usuario:\n1)Administrador\n2)Profesor\nPerfil:");
+        scanf("%d",&opc);
+        
         switch(opc){
             case 1:
                 strcpy("administrador",newUser.perfil);
@@ -75,11 +77,11 @@ void modificar_usuario(Usuario *usuario)
     listar_usuario(&usuario);
     printf("Inidica que usuario desea modificar:");
     scanf("%d",&numUser);
-    printf("Injdica que dato desea modificar:"
-            "\n1)Nombre\n2)Perfil\n3)Login\n4)Pass");
-    scanf("%d",&numOpc);
     
     do{
+        printf("Injdica que dato desea modificar:"
+            "\n1)Nombre\n2)Perfil\n3)Login\n4)Pass");
+        scanf("%d",&numOpc);
         switch(numOpc){
             case 1:
                 printf("Introduce el nombre del usuario (20 cáracteres):");
@@ -121,8 +123,14 @@ void modificar_usuario(Usuario *usuario)
 // Poscondicion:
 void listar_usuario(Usuario *usuario)
 {
-    int i;
+    int i, elemento;
     
+    printf("ID\tNombre\n");
+    
+    for(i=0; i<elemento; i++){
+        printf("%d) %s\n",usuario->id_usuario,usuario->nombre);
+    }
+    printf("---Fin de lista---");
 }
 // Cabecera: void menu_usuario()
 // Precondicion:
