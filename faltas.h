@@ -3,9 +3,10 @@
 
 #include "fichero.h"
 
+void a();
 void menuFaltas();
-Falta* mostrarFaltas(Alumno*, Materia*, Falta*);
-void anadirFaltas(Alumno*, Falta*);
+Falta* mostrarFaltas(Alumno*, Materia*);
+void anadirFaltas(Falta*);
 void modificarFaltas(Alumno*, Falta*);
 void borrarFaltas(Alumno*, Falta*);
 
