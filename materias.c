@@ -8,7 +8,7 @@ void bajaMaterias(Materia *materia);
 void modificarMaterias(Materia *materia);
 void listarMaterias(Materia *materia);
 
-int mainMaterias(){
+
 
 /*cabecera: void menuMaterias()
 precondicion: Ser llamado por el usuario
@@ -18,18 +18,18 @@ int op;
 Materia *materia;
 
 do{
-    printf("Introduzca la operacion a realizar:\n 1.-Alta Materias.\n 2.-Baja Materias.\n 3.-Modificar Materias.\n 4.-Listar Materias.\n 5.-Salir.\n");
+    printf("Operaciones disponibles: \n 1.-Alta Materias.\n 2.-Baja Materias.\n 3.-Modificar Materias.\n 4.-Listar Materias.\n 5.-Salir.\n");
     do{
-        printf("Introduzca la operacion a realizar: \n");
+        printf("Introduzca la operacion a realizar: ");
         scanf("%d",&op);
         }while(op<1 || op>5);
         if (op==1) altaMaterias(materia);
         if (op==2) bajaMaterias(materia);
-        if (op==3) modificarMatriculas(materia);
-        if (op==4) eliminarMatriculas(materia);
+        if (op==3) modificarMaterias(materia);
+        if (op==4) listarMaterias(materia);
 }while(op=!5);
 }
-return 0;}
+
 
 /*cabecera: void altaMaterias()
 precondicion:
@@ -40,10 +40,10 @@ Materia mat;
 mat.nombre;
 mat.abreviatura;
 
-printf("Indique el nombre de la materia a dar de alta: \n");
-    fgets(mat.id_mat, 51, stdin);
+printf("\nIndique el nombre de la materia a dar de alta: ");
+    fgets(mat.nombre, 51, stdin);
 
-printf("Indique la abreviatura de la materia: \n");
+printf("\nIndique la abreviatura de la materia: \n");
     fgets(mat.abreviatura, 4, stdin);
 
 }
@@ -55,9 +55,9 @@ void bajaMaterias(Materia* materia){
 Materia mat;
 mat.nombre;
 
-listarMaterias();
-printf("Indique el nombre de la materia a dar de baja: \n");
-fgets(mat.id_mat, 51, stdin);
+listarMaterias(&materia);
+printf("\nIndique el nombre de la materia a dar de baja: ");
+fgets(mat.nombre, 51, stdin);
 
 }
 
@@ -69,11 +69,11 @@ Materia mat;
 mat.nombre;
 mat.abreviatura;
 
-listarMaterias();
-printf("Indique el nombre de la materia a modificar: \n");
-    fgets(mat.id_mat, 51, stdin);
+listarMaterias(&materia);
+printf("\nIndique el nombre de la materia a modificar: ");
+    fgets(mat.nombre, 51, stdin);
 
-printf("Indique la abreviatura de la materia: \n");
+printf("\nIndique la abreviatura de la materia: ");
     fgets(mat.abreviatura, 4, stdin);
 }
 
@@ -81,11 +81,14 @@ printf("Indique la abreviatura de la materia: \n");
 precondicion:
 postcondicion:      */
 void listarMaterias(Materia* materia){
-Materia mat;
-mat.nombre;
-mat.abreviatura;
 
 
+int i,n;
+    printf("\nID\tMATERIA");
+for(i=0;i==n;i++){
+    printf("%d\t%s\n",materia->id_materia, materia->nombre);
+}
+printf("\n\nFIN DE LISTA\n\n");
 
 }
 
