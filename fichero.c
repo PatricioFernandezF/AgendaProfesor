@@ -420,7 +420,7 @@ Falta* obtenerFaltas(int *n){
     FILE *FICHERO_FALTAS;
     *n=0;
     Falta *e = (Falta*) calloc(1,sizeof(Falta));
-    if(FICHERO_FALTAS = fopen("materias.txt", "r"))
+    if(FICHERO_FALTAS = fopen("faltas.txt", "r"))
     {
         char *contenido = NULL;
         int ftam=0;
