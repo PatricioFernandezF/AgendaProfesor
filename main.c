@@ -95,5 +95,35 @@ void menu_principal(int opc)
         }while(x!=0);
     }
     else{
+        do
+        {
+            printf("Introduzca la opcion que desea\n\n "
+                    "1: \n "
+                    "2: \n "
+                    "3: \n "
+                    "4: \n "
+                    "0: salir\n");
+            scanf("%d",&x);
+            switch (x)
+            {
+            case 0:
+                exit(0);
+            case 1:
+                alta_usuario(usuario);
+                break;
+            case 2:
+                baja_usuario(usuario);
+                break;
+            case 3:
+                modificar_usuario(usuario);
+                break;
+            case 4:
+                listar_usuario(usuario);
+                break;
+            default:
+                printf("Error al elegir la opcion.\t");
+                break;
+            }
+        }while(x!=0);
     }
 }
