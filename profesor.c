@@ -54,6 +54,9 @@ void listar_alumno_grupo(Horario *lista){
     
 }
 
+// Cabecera: int dia_semana()
+// Precondicion: No recibe nada 
+// Poscondicion: Retorna el número del día de la semana
 int dia_semana(){
     
     //Declaracion de vectores y variables
@@ -101,8 +104,6 @@ int dia_semana(){
     result4=(result2-result3)%7;
     result5=d%7;
     d=(result1+result4+m+result5)%7;
-
-    //resuelto el dia, con un switch case mostramos en pantalla lo que corresponda.
     
     return d;
 }
