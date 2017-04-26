@@ -146,6 +146,9 @@ Usuario loguear(char* logUsuario, char* passUsuario){
 // Cabecera: Usuario* obtenerUsuarios()
 // Precondicion:
 // Poscondicion:
+// Cabecera: Usuario* obtenerUsuarios()
+// Precondicion:
+// Poscondicion:
 Usuario* obtenerUsuarios(int *n){
     FILE *FICHERO_USUARIO;
     *n=0;
@@ -158,7 +161,7 @@ Usuario* obtenerUsuarios(int *n){
         ftam = ftell(FICHERO_USUARIO);
         rewind(FICHERO_USUARIO);
 
-        contenido = (char*) malloc(sizeof(char) * ftam);
+        contenido = (char*) malloc(sizeof(char)* 1000 * ftam);
         fread(contenido, 1, ftam, FICHERO_USUARIO);
 
         //AUX ALMACENA TODAS LAS LINEAS
@@ -167,18 +170,22 @@ Usuario* obtenerUsuarios(int *n){
         char* guard;
 
         guard=strtok(contenido,"\n");
-        aux[*n] = (char*) malloc(sizeof(char) * 200);
+        aux[*n] = (char*) malloc(sizeof(char**) * 20000);
         strcpy(aux[*n],guard);
         ++*n;
         e = (Usuario*) realloc(e, *n*sizeof(Usuario));
 
         while(guard!=NULL)
         {
+
             guard=strtok(NULL,"\n");
             if(guard!=NULL)
             {
-                aux[*n] = (char*) malloc(sizeof(char) * 200);
+
+                aux[*n] = (char*) malloc(sizeof(char**) * 20000);
                 strcpy(aux[*n],guard);
+
+
                 ++*n;
             }
         }
@@ -187,7 +194,7 @@ Usuario* obtenerUsuarios(int *n){
         int i;
         for(i=0;i<*n;i++)
         {
-            e = (Usuario*) realloc(e, *n*sizeof(Usuario));
+            e = (Usuario*) realloc(e, *n*2000*sizeof(Usuario));
             e[i] = obtenerUsuario(aux[i]);
         }
 
@@ -196,7 +203,6 @@ Usuario* obtenerUsuarios(int *n){
 
     return e;
 }
-
 // Cabecera: Alumno* obtenerAlumnos()
 // Precondicion:
 // Poscondicion:
@@ -428,16 +434,16 @@ Falta* obtenerFaltas(int *n){
         ftam = ftell(FICHERO_FALTAS);
         rewind(FICHERO_FALTAS);
 
-        contenido = (char*) malloc(sizeof(char) * ftam);
+        contenido = (char*) calloc(ftam,sizeof(char));
         fread(contenido, 1, ftam, FICHERO_FALTAS);
 
         //AUX ALMACENA TODAS LAS LINEAS
-        char** aux= (char**) malloc(sizeof(char**) * 10000000);
+        char** aux= (char**) calloc(ftam,sizeof(char**));
         //Guard almacena una linea
         char* guard;
 
         guard=strtok(contenido,"\n");
-        aux[*n] = (char*) malloc(sizeof(char) * 200);
+        aux[*n] = (char*) malloc(sizeof(char**) * *n);
         strcpy(aux[*n],guard);
         ++*n;
         e = (Falta*) realloc(e, *n*sizeof(Falta));
@@ -447,7 +453,7 @@ Falta* obtenerFaltas(int *n){
             guard=strtok(NULL,"\n");
             if(guard!=NULL)
             {
-                aux[*n] = (char*) malloc(sizeof(char) * 200);
+                aux[*n] = (char*) malloc(sizeof(char**) * ftam);
                 strcpy(aux[*n],guard);
                 ++*n;
             }
@@ -483,12 +489,14 @@ Horario* obtenerHorarios(int *n){
         fread(contenido, 1, ftam, FICHERO_HORARIOS);
 
         //AUX ALMACENA TODAS LAS LINEAS
-        char** aux= (char**) malloc(sizeof(char**) * 200);
+        char** aux= (char**) calloc(ftam,sizeof(char**));
         //Guard almacena una linea
         char* guard;
 
         guard=strtok(contenido,"\n");
-        aux[*n] = (char*) malloc(sizeof(char) * 200);
+        aux[*n] = (char*) malloc(sizeof(char**) * *n);
+        guard=strtok(contenido,"\n");
+        aux[*n] = (char*) malloc(sizeof(char**) * 200);
         strcpy(aux[*n],guard);
         ++*n;
         e = (Horario*) realloc(e, *n*sizeof(Horario));
@@ -498,7 +506,7 @@ Horario* obtenerHorarios(int *n){
             guard=strtok(NULL,"\n");
             if(guard!=NULL)
             {
-                aux[*n] = (char*) malloc(sizeof(char) * 200);
+                aux[*n] = (char*) malloc(sizeof(char**) * ftam);
                 strcpy(aux[*n],guard);
                 ++*n;
             }
