@@ -36,7 +36,7 @@ void alta_alumno()
 
 
         printf("%c\n%c\n%c\n%c\n%c\n%c\n",x.id_alumno,x.nombre,x.direccion,x.localidad,x.curso,x.grupo);
-        printf("¿Son correctos los datos? s/n\n");
+        printf("Â¿Son correctos los datos? s/n\n");
         scanf("%c",&c);
 
 
