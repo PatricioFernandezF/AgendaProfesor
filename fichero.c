@@ -9,11 +9,11 @@ Usuario obtenerUsuario(char *cadena){
     Usuario u;
 
     char* guard;
-
     guard=strtok(cadena,"-");
     strcpy(u.id_usuario,guard);
     guard = strtok(NULL, "-");
     strcpy(u.nombre,guard);
+    printf("%s",u.nombre);
     guard = strtok(NULL, "-");
     strcpy(u.perfil,guard);
     guard = strtok(NULL, "-");
@@ -153,6 +153,7 @@ Usuario* obtenerUsuarios(int *n){
     FILE *FICHERO_USUARIO;
     *n=0;
     Usuario *e = (Usuario*) calloc(1,sizeof(Usuario));
+
     if(FICHERO_USUARIO = fopen("usuarios.txt", "r"))
     {
         char *contenido = NULL;
@@ -161,11 +162,11 @@ Usuario* obtenerUsuarios(int *n){
         ftam = ftell(FICHERO_USUARIO);
         rewind(FICHERO_USUARIO);
 
-        contenido = (char*) malloc(sizeof(char)* 1000 * ftam);
+        contenido = (char*) calloc(ftam,sizeof(char*));
         fread(contenido, 1, ftam, FICHERO_USUARIO);
 
         //AUX ALMACENA TODAS LAS LINEAS
-        char** aux= (char**) malloc(sizeof(char**) * 1);
+        char** aux= (char**) calloc(1,sizeof(char**));
         //Guard almacena una linea
         char* guard;
 
@@ -184,7 +185,6 @@ Usuario* obtenerUsuarios(int *n){
 
                 aux[*n] = (char*) malloc(sizeof(char**) * 20000);
                 strcpy(aux[*n],guard);
-
 
                 ++*n;
             }
@@ -219,7 +219,7 @@ Alumno* obtenerAlumnos(int *n){
         ftam = ftell(FICHERO_ALUMNO);
         rewind(FICHERO_ALUMNO);
 
-        contenido = (char*) malloc(sizeof(char) * ftam);
+        contenido = (char*) calloc(ftam,sizeof(char*));
         fread(contenido, 1, ftam, FICHERO_ALUMNO);
 
         //AUX ALMACENA TODAS LAS LINEAS
