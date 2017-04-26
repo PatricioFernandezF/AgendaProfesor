@@ -3,8 +3,9 @@
 
 #include "fichero.h"
 
-void listar_grupos_dia(Horario *lista);
-void listar_alumno_grupo(Horario *lista);
+void menu_profesor();
+char seleccionar_grupos_dia(Horario *lista);
+void seleccionar_alumno_grupo(Horario *lista);
 int dia_semana();
 
 #endif // PROFESOR_H_INCLUDED

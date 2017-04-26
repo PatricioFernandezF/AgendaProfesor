@@ -5,16 +5,50 @@
 #include "profesor.h"
 #include "fichero.h"
 
-void listar_grupos_dia(Horario *lista, int idProf);
-void listar_alumno_grupo(Horario *lista);
+void menu_profesor(int idProf);
+void seleccionar_grupos_dia(Horario *lista, int idProf);
+void seleccionar_alumno_grupo(Horario *lista);
 int dia_semana();
 
-// Cabecera: void alta_usuario(Usuario*)
-// Precondicion: Recibe una cadena de caracteres de un usuario.
-// Poscondicion:
-void listar_grupos_dia(Horario *lista, char idProf){
+// Cabecera: void menu_profesor(E entero idProf)
+// Precondicion:   id del profesor que ha accedido al sistema
+// Poscondicion: Muestra el menú de opciones y acceso de un usuario o profesor 
+void menu_profesor(int idProf){
     
-    int i,grup,elementos,dia;
+    char grupoSel[11]="";
+    int posGrup,x;
+    
+    do
+        {
+            printf("Introduzca la opcion que desea\n\n "
+                    "1: Seleccionar grupo\n "
+                    "2: Mostrar alumnos del grupo %s\n "
+                    "0: salir\n",grupoSel);
+            scanf("%d",&x);
+            switch (x)
+            {
+            case 0:
+                exit(0);
+            case 1:
+                strcpy(grupoSel,seleccionar_grupo_dia(lista,idProf));
+                menu_profesor(idProf);
+                break;
+            case 2:
+                seleccionar_alumno_grupo(alumnos,grupoSel);
+                break;
+            default:
+                printf("Error al elegir la opcion.\t");
+                break;
+            }
+        }while(x!=0);
+}
+
+// Cabecera: void seleccionar_grupos_dia(hrario lista*, caracter idProf)
+// Precondicion: Recibe una cadena de caracteres de un usuario.
+// Poscondicion: Retorna el nombre del grupo elegido
+char seleccionar_grupos_dia(Horario *lista, char idProf){
+    
+    int i,elementos,dia,posGrup;
     char grupoNom[11],d[3];
     
     dia=dia_semana();
@@ -34,24 +68,36 @@ void listar_grupos_dia(Horario *lista, char idProf){
 
         printf("---Fin de lista---\n\n");
 
-        do{
-            printf("Indica que grupo desea seleccionar:");
-            scanf("%d",&grup);
-        }while();
-
-        i=0;
-        while(){
-
-        }
-            strcpy(lista->grupo,grupoNom);
+        printf("Indica que grupo desea seleccionar:");
+        scanf("%d",posGrup);
+        
+        strcpy(grupoNom,lista[posGrup]);
     }
+    
+    return grupoNom;
 }
 
-// Cabecera: void alta_usuario(Usuario*)
-// Precondicion: Recibe una cadena de caracteres de un usuario.
-// Poscondicion:    
-void listar_alumno_grupo(Horario *lista){
+// Cabecera: void seleccionar_alumno_grupo(Alumno*, caracter posGrup)
+// Precondicion: Recibe la lista de alumnos y el nombre del grupo que se quiere listar.
+// Poscondicion:  Muestra por pantalla los alumnos   
+void seleccionar_alumno_grupo(Alumno *lista, char posGrup){
     
+    int elementos,i;
+    char dni[7];
+    
+    printf("Nº\tDNI\tNombre\n");
+        
+        for(i=0; i<elementos;i++){
+            if(strcmp(posGrup,lista[i]->grupo)){
+                printf("%d\t%s\n",i,lista[i]->id_alumno,lista[i].nombre);
+            }
+        }
+        printf("---Fin de lista---\n\n");
+
+        printf("Indica que dni desea seleccionar:");
+        fgets (dni, 7, stdin);
+        
+        
 }
 
 // Cabecera: int dia_semana()
