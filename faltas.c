@@ -1,18 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "fichero.h"
 #include "faltas.h"
-
-int principalFa(){
-
-/*cabecera: void menuFaltas()
-precondición: Ser llamado por el usuario.
-postcondición: Mostrar menu.*/
-
-void a(){
-
-}
 
 void menuFaltas(){
     int n;
@@ -36,14 +26,13 @@ void menuFaltas(){
                     break;
             case 3: modificarFaltas(alumno, faltas);
                     break;
-            case 4: eliminarFaltas(alumno, faltas);
+            case 4: borrarFaltas(alumno, faltas);
                     break;
         }
     }while(op!=5);
 
     fflush(stdin);
 
-}
 }
 
 /*cabecera: void mostrarFaltas()
@@ -53,29 +42,34 @@ postcondición: */
 Falta* mostrarFaltas(Alumno* alumno, Materia* materia){
     Alumno al;
     Materia mat;
+    int i, n;
 
     printf("Indique el id del alumno del que desea ver sus faltas.");
     fgets(al.id_alumno, 7, stdin);
     printf("Indique el id de la asignatura indicada.");
     fgets(mat.id_materia, 5, stdin);
+
+    for(i=0;i==n;i++){
+        printf("%d)%s\n", alumno->id_alumno, materia->id_materia);
+    }
 }
 
 /*cabecera: void anadirFaltas()
 precondición:
 postcondición: */
 
-void anadirFaltas(Falta* falta){
+void anadirFaltas(Falta* faltas){
     Falta fal;
 
-    printf("Indique la fecha de la falta");
+    printf("Indique la fecha de la falta\n");
     fgets(fal.fecha, 10, stdin);
-    printf("Indique la hora de la falta");
+    printf("Indique la hora de la falta\n");
     fgets(fal.hora, 10, stdin);
-    printf("Indique la descripción de la falta");
+    printf("Indique la descripción de la falta\n");
     fgets(fal.descripcion, 1, stdin);
-    printf("Indique el estado de la falta");
+    printf("Indique el estado de la falta\n");
     fgets(fal.estado_falta, 17, stdin);
-    printf("Indique el id del alumno al que desea poner la falta");
+    printf("Indique el id del alumno al que desea poner la falta\n");
     fgets(fal.id_alumno, 7, stdin);
 }
 
@@ -83,7 +77,7 @@ void anadirFaltas(Falta* falta){
 precondición:
 postcondición: */
 
-void modificarFaltas(Alumno* alumno, Falta* falta){
+void modificarFaltas(Alumno* alumno, Falta* faltas){
     Falta fal;
     int o;
 
@@ -130,6 +124,6 @@ void modificarFaltas(Alumno* alumno, Falta* falta){
 precondición:
 postcondición: */
 
-void borrarFaltas(Alumno* alumno, Falta* falta){
+void borrarFaltas(Alumno* alumno, Falta* faltas){
 
 }
