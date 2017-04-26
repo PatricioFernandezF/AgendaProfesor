@@ -64,7 +64,7 @@ Matricula* obtenerMatriculas(int *n);
 Calificacion* obtenerCalificaciones(int *n);
 Falta* obtenerFaltas(int *n);
 Horario* obtenerHorarios(int *n);
-Usuario loguear(char* logUsuario, char* passUsuario);
+
 void guardarDatosAlumno(Alumno* alumnos, int elementos);
 void guardarDatosMateria(Materia* materias, int elementos);
 void guardarDatosMatricula(Matricula* matriculas, int elementos);

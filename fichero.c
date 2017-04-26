@@ -3,7 +3,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+    Describo el funcionamiento de carga a continuacion: Las funciones en plural dividen todos los string del fichero
+    por las \n esto nos dara todas las lineas del fichero
+    Para ello utilizamos las siguientes variables
+    guard donde almacenamos linea por linea (para ir separando por \n)
+    aux donde guardamos todas las lineas
+    Luego recorremos aux y vamos llamando a la funcion en singular para ir almacenando las lineas en nuestro vector
+    Por ultimo las funciones singular no son publicas puesto que solo las utilizamos para ayudar a nuestras funciones publicas
+*/
 
+/*
+    Las funciones para guardar simplemente recorren el vector y van almacenandolo en el fichero
+*/
+
+// Cabecera: Usuario obtenerUsuario(char *)
+// Precondicion: La funcion plural nos da la linea con la informacion
+// Poscondicion: Crea un objeto de tipo Usuario con la linea de texto y lo devuelve
 Usuario obtenerUsuario(char *cadena){
 
     Usuario u;
@@ -23,7 +39,9 @@ Usuario obtenerUsuario(char *cadena){
 
     return u;
 }
-
+// Cabecera: Alumno obtenerAlumno(char *)
+// Precondicion: La funcion plural nos da la linea con la informacion
+// Poscondicion: Crea un objeto de tipo Alumno con la linea de texto y lo devuelve
 Alumno obtenerAlumno(char *cadena){
 
     Alumno a;
@@ -44,7 +62,9 @@ Alumno obtenerAlumno(char *cadena){
 
     return a;
 }
-
+// Cabecera: Materia obtenerMateria(char *)
+// Precondicion: La funcion plural nos da la linea con la informacion
+// Poscondicion: Crea un objeto de tipo Materia con la linea de texto y lo devuelve
 Materia obtenerMateria(char *cadena){
     Materia m;
     sscanf(cadena,"%s-%s-%s", m.id_materia, m.nombre,m.abreviatura);
@@ -60,7 +80,9 @@ Materia obtenerMateria(char *cadena){
 
     return m;
 }
-
+// Cabecera: Matricula obtenerMatricula(char *)
+// Precondicion: La funcion plural nos da la linea con la informacion
+// Poscondicion: Crea un objeto de tipo Matricula con la linea de texto y lo devuelve
 Matricula obtenerMatricula(char* cadena){
     Matricula m;
 
@@ -72,7 +94,9 @@ Matricula obtenerMatricula(char* cadena){
 
     return m;
 }
-
+// Cabecera: Calificacion obtenerCalificacion(char *)
+// Precondicion: La funcion plural nos da la linea con la informacion
+// Poscondicion: Crea un objeto de tipo Calificacion con la linea de texto y lo devuelve
 Calificacion obtenerCalificacion(char* cadena){
     Calificacion c;
     char* guard;
@@ -89,7 +113,9 @@ Calificacion obtenerCalificacion(char* cadena){
     strcpy(c.calificacion,guard);
     return c;
 }
-
+// Cabecera: Falta obtenerFalta(char *)
+// Precondicion: La funcion plural nos da la linea con la informacion
+// Poscondicion: Crea un objeto de tipo Falta con la linea de texto y lo devuelve
 Falta obtenerFalta(char* cadena){
     Falta f;
     char* guard;
@@ -105,7 +131,9 @@ Falta obtenerFalta(char* cadena){
     strcpy(f.id_alumno,guard);
     return f;
 }
-
+// Cabecera: Horario obtenerHorario(char *)
+// Precondicion: La funcion plural nos da la linea con la informacion
+// Poscondicion: Crea un objeto de tipo Horario con la linea de texto y lo devuelve
 Horario obtenerHorario(char* cadena){
     Horario h;
     char* guard;
@@ -121,34 +149,11 @@ Horario obtenerHorario(char* cadena){
     strcpy(h.grupo,guard);
     return h;
 }
-// FUNCIONES PUBLICAS
 
 
-Usuario loguear(char* logUsuario, char* passUsuario){
-    /*
-    Usuario *u = obtenerUsuarios();
-    Usuario usuario;
-    int dimension = nUsuarios();
-    int encontrado = 0;
-    int cont = 0;
-    while(cont < dimension && encontrado == 0){
-        if(strcmp(u[cont].login, logUsuario) == 0 && strcmp(u[cont].pass, passUsuario) == 0){
-            encontrado = 1;
-            usuario = u[cont];
-        }
-        cont++;
-    }
-    return usuario;
-    */
-}
-
-
-// Cabecera: Usuario* obtenerUsuarios()
-// Precondicion:
-// Poscondicion:
-// Cabecera: Usuario* obtenerUsuarios()
-// Precondicion:
-// Poscondicion:
+// Cabecera: Usuario* obtenerUsuarios(int*)
+// Precondicion: el int que recibe debe estar declarado
+// Poscondicion: devuelve el vector de los usuarios y en el parametro almacena el tamano del vector
 Usuario* obtenerUsuarios(int *n){
     FILE *FICHERO_USUARIO;
     *n=0;
@@ -190,7 +195,6 @@ Usuario* obtenerUsuarios(int *n){
             }
         }
 
-
         int i;
         for(i=0;i<*n;i++)
         {
@@ -203,9 +207,9 @@ Usuario* obtenerUsuarios(int *n){
 
     return e;
 }
-// Cabecera: Alumno* obtenerAlumnos()
-// Precondicion:
-// Poscondicion:
+// Cabecera: Alumno* obtenerAlumnos(int *n)
+// Precondicion: el int que recibe debe estar declarado
+// Poscondicion: devuelve el vector de los usuarios y en el parametro almacena el tamano del vector
 Alumno* obtenerAlumnos(int *n){
     FILE *FICHERO_ALUMNO;
     *n=0;
@@ -259,9 +263,9 @@ Alumno* obtenerAlumnos(int *n){
     return e;
 }
 
-// Cabecera: Usuario* obtenerUsuarios()
-// Precondicion:
-// Poscondicion:
+// Cabecera: Materia* obtenerMaterias(int *n)
+// Precondicion: el int que recibe debe estar declarado
+// Poscondicion: devuelve el vector de los usuarios y en el parametro almacena el tamano del vector
 Materia* obtenerMaterias(int *n){
     FILE *FICHERO_MATERIA;
     *n=0;
@@ -313,9 +317,9 @@ Materia* obtenerMaterias(int *n){
 
     return e;
 }
-// Cabecera: Plantilla* obtenerMatriculas()
-// Precondicion:
-// Poscondicion:
+// Cabecera: Matricula* obtenerMatriculas(int *n)
+// Precondicion: el int que recibe debe estar declarado
+// Poscondicion: devuelve el vector de los usuarios y en el parametro almacena el tamano del vector
 Matricula* obtenerMatriculas(int *n){
     FILE *FICHERO_MATRICULA;
     *n=0;
@@ -367,9 +371,9 @@ Matricula* obtenerMatriculas(int *n){
 
     return e;
 }
-// Cabecera: Plantilla* obtenerCalificaciones()
-// Precondicion:
-// Poscondicion:
+// Cabecera: Calificacion* obtenerCalificaciones(int *n)
+// Precondicion: el int que recibe debe estar declarado
+// Poscondicion: devuelve el vector de los usuarios y en el parametro almacena el tamano del vector
 Calificacion* obtenerCalificaciones(int *n){
     FILE *FICHERO_CALIFICACIONES;
     *n=0;
@@ -419,9 +423,9 @@ Calificacion* obtenerCalificaciones(int *n){
     return e;
 }
 
-// Cabecera: Falta* obtenerFaltas()
-// Precondicion:
-// Poscondicion:
+// Cabecera: Falta* obtenerFaltas(int *n)
+// Precondicion: el int que recibe debe estar declarado
+// Poscondicion: devuelve el vector de los usuarios y en el parametro almacena el tamano del vector
 Falta* obtenerFaltas(int *n){
     FILE *FICHERO_FALTAS;
     *n=0;
@@ -470,9 +474,9 @@ Falta* obtenerFaltas(int *n){
     return e;
 }
 
-// Cabecera: Horario* obtenerHorarios()
-// Precondicion:
-// Poscondicion:
+// Cabecera: Horario* obtenerHorarios(int *n)
+// Precondicion: el int que recibe debe estar declarado
+// Poscondicion: devuelve el vector de los usuarios y en el parametro almacena el tamano del vector
 Horario* obtenerHorarios(int *n){
     FILE *FICHERO_HORARIOS;
     *n=0;
@@ -523,6 +527,9 @@ Horario* obtenerHorarios(int *n){
     return e;
 }
 
+// Cabecera: void guardarDatosUsuario(Usuario*,int)
+// Precondicion: Recibe un vector con los usuarios que deseamos guardar y un int con el tamano del vector
+// Poscondicion: Guarda en el fichero el vector
 void guardarDatosUsuario(Usuario* usuarios, int elementos){
     int i;
     Usuario e;
@@ -538,7 +545,9 @@ void guardarDatosUsuario(Usuario* usuarios, int elementos){
     }
     fclose(FICHERO_USUARIO);
 }
-
+// Cabecera: void guardarDatosAlumno(Alumno*,int)
+// Precondicion: Recibe un vector con los alumnos que deseamos guardar y un int con el tamano del vector
+// Poscondicion: Guarda en el fichero el vector
 void guardarDatosAlumno(Alumno* alumnos, int elementos){
     int i;
     Alumno e;
@@ -554,7 +563,9 @@ void guardarDatosAlumno(Alumno* alumnos, int elementos){
     }
     fclose(FICHERO_ALUMNO);
 }
-
+// Cabecera: void guardarDatosMateria(Materia*,int)
+// Precondicion: Recibe un vector con los materias que deseamos guardar y un int con el tamano del vector
+// Poscondicion: Guarda en el fichero el vector
 void guardarDatosMateria(Materia* materias, int elementos){
     int i;
     Materia e;
@@ -569,7 +580,9 @@ void guardarDatosMateria(Materia* materias, int elementos){
     }
     fclose(FICHERO_MATERIA);
 }
-
+// Cabecera: void guardarDatosMatricula(Matricula*,int)
+// Precondicion: Recibe un vector con los matriculas que deseamos guardar y un int con el tamano del vector
+// Poscondicion: Guarda en el fichero el vector
 void guardarDatosMatricula(Matricula* matriculas, int elementos){
     int i;
     Matricula e;
@@ -584,7 +597,9 @@ void guardarDatosMatricula(Matricula* matriculas, int elementos){
     }
     fclose(FICHERO_MATRICULA);
 }
-
+// Cabecera: void guardarDatosCalificaciones(Calificacion*,int)
+// Precondicion: Recibe un vector con los calificaciones que deseamos guardar y un int con el tamano del vector
+// Poscondicion: Guarda en el fichero el vector
 void guardarDatosCalificaciones(Calificacion* calificaciones, int elementos){
     int i;
     Calificacion e;
@@ -599,7 +614,9 @@ void guardarDatosCalificaciones(Calificacion* calificaciones, int elementos){
     }
     fclose(FICHERO_CALIFICACION);
 }
-
+// Cabecera: void guardarDatosFaltas(Falta*,int)
+// Precondicion: Recibe un vector con los faltas que deseamos guardar y un int con el tamano del vector
+// Poscondicion: Guarda en el fichero el vector
 void guardarDatosFaltas(Falta* faltas, int elementos){
     int i;
     Falta e;
@@ -614,7 +631,9 @@ void guardarDatosFaltas(Falta* faltas, int elementos){
     }
     fclose(FICHERO_FALTA);
 }
-
+// Cabecera: void guardarDatosHorarios(Horario*,int)
+// Precondicion: Recibe un vector con los horarios que deseamos guardar y un int con el tamano del vector
+// Poscondicion: Guarda en el fichero el vector
 void guardarDatosHorarios(Horario* horarios, int elementos){
     int i;
     Horario e;
@@ -629,5 +648,3 @@ void guardarDatosHorarios(Horario* horarios, int elementos){
     }
     fclose(FICHERO_HORARIO);
 }
-
-
