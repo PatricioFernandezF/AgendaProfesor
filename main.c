@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "profesor.h"
 #include "fichero.h"
 
 int main()
 {
     Usuario L_Usuario[1];
     char login[6], pass[9], perfil[15];
-    int elementos, exisUser=0, passOK=0, errorPass=0, i;
+    int elementos, exisUser=0, passOK=0, errorPass=0, i, id;
     
     printf("BIENVENIDO AL CUADERNO DEL PROFESOR\n");
         
@@ -37,8 +37,10 @@ int main()
         /*Conmrpobamos con el array de usuarios si la contraseña, en caso contrario error*/
         i=0;
         while(i<elementos || passOK==0){
-            if(strcmp(pass,L_Usuario[i]->pass))
+            if(strcmp(pass,L_Usuario[i]->pass)){
                 passOK=1;
+                id=L_Usuario[i].id_usuario;
+            }
         }
 
         if(passOK==0){
@@ -49,16 +51,16 @@ int main()
     }while(passOK==0 && errorPass<3);
     
     if(passOK==1 && exisUser==1){
-        menu_principal(strcmp(perfil,"administrador"));
+        menu_principal(strcmp(perfil,"administrador"),id);
     }
     
     return 0;
 }
 
-// Cabecera: void menu_usuario()
-// Precondicion:
-// Poscondicion:
-void menu_principal(int opc)
+// Cabecera: void menu_principal(E entero opc, E entero id)
+// Precondicion: Valor 1 para administrados, valor <> 1 para usuario
+// Poscondicion:  Accede a los distintos menus de la aplicación, no retorna nada
+void menu_principal(int opc, int id)
 {
     int x;
     
@@ -95,35 +97,7 @@ void menu_principal(int opc)
         }while(x!=0);
     }
     else{
-        do
-        {
-            printf("Introduzca la opcion que desea\n\n "
-                    "1: \n "
-                    "2: \n "
-                    "3: \n "
-                    "4: \n "
-                    "0: salir\n");
-            scanf("%d",&x);
-            switch (x)
-            {
-            case 0:
-                exit(0);
-            case 1:
-                alta_usuario(usuario);
-                break;
-            case 2:
-                baja_usuario(usuario);
-                break;
-            case 3:
-                modificar_usuario(usuario);
-                break;
-            case 4:
-                listar_usuario(usuario);
-                break;
-            default:
-                printf("Error al elegir la opcion.\t");
-                break;
-            }
-        }while(x!=0);
+        menu_profesor(id);
     }
 }
+
