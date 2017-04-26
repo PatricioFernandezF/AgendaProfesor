@@ -275,7 +275,7 @@ Materia* obtenerMaterias(int *n){
         ftam = ftell(FICHERO_MATERIA);
         rewind(FICHERO_MATERIA);
 
-        contenido = (char*) malloc(sizeof(char) * ftam);
+        contenido = (char*) calloc(ftam,sizeof(char*));
         fread(contenido, 1, ftam, FICHERO_MATERIA);
 
         //AUX ALMACENA TODAS LAS LINEAS
@@ -329,7 +329,7 @@ Matricula* obtenerMatriculas(int *n){
         ftam = ftell(FICHERO_MATRICULA);
         rewind(FICHERO_MATRICULA);
 
-        contenido = (char*) malloc(sizeof(char) * ftam);
+        contenido = (char*) calloc(ftam,sizeof(char*));
         fread(contenido, 1, ftam, FICHERO_MATRICULA);
 
         //AUX ALMACENA TODAS LAS LINEAS
@@ -383,7 +383,7 @@ Calificacion* obtenerCalificaciones(int *n){
         ftam = ftell(FICHERO_CALIFICACIONES);
         rewind(FICHERO_CALIFICACIONES);
 
-        contenido = (char*) malloc(sizeof(char) * ftam);
+        contenido = (char*) calloc(ftam,sizeof(char*));
         fread(contenido, 1, ftam, FICHERO_CALIFICACIONES);
 
         //AUX ALMACENA TODAS LAS LINEAS
@@ -434,7 +434,7 @@ Falta* obtenerFaltas(int *n){
         ftam = ftell(FICHERO_FALTAS);
         rewind(FICHERO_FALTAS);
 
-        contenido = (char*) calloc(ftam,sizeof(char));
+        contenido = (char*) calloc(ftam,sizeof(char*));
         fread(contenido, 1, ftam, FICHERO_FALTAS);
 
         //AUX ALMACENA TODAS LAS LINEAS
@@ -453,7 +453,7 @@ Falta* obtenerFaltas(int *n){
             guard=strtok(NULL,"\n");
             if(guard!=NULL)
             {
-                aux[*n] = (char*) malloc(sizeof(char**) * ftam);
+                aux[*n] = (char**) malloc(sizeof(char**) * ftam);
                 strcpy(aux[*n],guard);
                 ++*n;
             }
@@ -462,7 +462,7 @@ Falta* obtenerFaltas(int *n){
         int i;
         for(i=0;i<*n;i++)
         {
-            e = (Falta*) realloc(e, *n*sizeof(Falta));
+            e = (Falta*) realloc(e, *n*10*sizeof(Falta));
             e[i] = obtenerFalta(aux[i]);
         }
         fclose(FICHERO_FALTAS);
@@ -485,7 +485,7 @@ Horario* obtenerHorarios(int *n){
         ftam = ftell(FICHERO_HORARIOS);
         rewind(FICHERO_HORARIOS);
 
-        contenido = (char*) malloc(sizeof(char) * ftam);
+        contenido = (char*) calloc(ftam,sizeof(char*));
         fread(contenido, 1, ftam, FICHERO_HORARIOS);
 
         //AUX ALMACENA TODAS LAS LINEAS
