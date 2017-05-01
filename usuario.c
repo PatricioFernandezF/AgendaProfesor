@@ -128,7 +128,7 @@ void listar_usuario(Usuario *usuario)
     printf("ID\tNombre\n");
     
     for(i=0; i<elemento; i++){
-        printf("%d) %s\n",usuario->id_usuario,usuario->nombre);
+        printf("%d) %s\n",usuario.id_usuario,usuario.nombre);
     }
     printf("---Fin de lista---");
 }

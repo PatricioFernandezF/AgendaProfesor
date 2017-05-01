@@ -61,8 +61,8 @@ char seleccionar_grupos_dia(Horario *lista, char idProf){
         printf("Nº\tGrupo\n");
         
         for(i=0; i<elementos;i++){
-            if(strcmp(idProf,lista[i]->id_profesor) && strcmp(d,lista[i]->dia)){
-                printf("%d\t%s\n",i,lista->grupo);
+            if(strcmp(idProf,lista[i].id_profesor) && strcmp(d,lista[i].dia)){
+                printf("%d\t%s\n",i,lista.grupo);
             }
         }
 
@@ -88,8 +88,8 @@ void seleccionar_alumno_grupo(Alumno *lista, char posGrup){
     printf("Nº\tDNI\tNombre\n");
         
         for(i=0; i<elementos;i++){
-            if(strcmp(posGrup,lista[i]->grupo)){
-                printf("%d\t%s\n",i,lista[i]->id_alumno,lista[i].nombre);
+            if(strcmp(posGrup,lista[i].grupo)){
+                printf("%d)\t%d\t%s\n",i,lista[i].id_alumno,lista[i].nombre);
             }
         }
         printf("---Fin de lista---\n\n");
@@ -121,9 +121,9 @@ int dia_semana(){
 
     //Una estructura tm, esta compuesta por datos de tipo int (vean la seccion de time.h)
 
-    d=tiempo->tm_mday;		//accedo al valor de dia de la estructura tm y se la asigno a dia
-    m=tiempo->tm_mon;		//accedo a mes de la estrutura tm y se la asigno a mes
-    a=(tiempo->tm_year)+1900;	//year es un contador a partir de 1900.
+    d=tiempo.tm_mday;		//accedo al valor de dia de la estructura tm y se la asigno a dia
+    m=tiempo.tm_mon;		//accedo a mes de la estrutura tm y se la asigno a mes
+    a=(tiempo.tm_year)+1900;	//year es un contador a partir de 1900.
 
     //comprobamos primero si el año es bisiesto o es regular
     //si es bisiesto, asignamos a m la posición del vector bisiesto -1

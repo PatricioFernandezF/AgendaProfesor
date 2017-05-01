@@ -19,9 +19,9 @@ int main()
         /*Conmrpobamos con el array de usuarios la existencia del usuario, en caso contrario error*/
         i=0;
         while(i<elementos || exisUser==0){
-            if(strcmp(login,L_Usuario[i]->login)){
+            if(strcmp(login,L_Usuario[i].login)){
                 exisUser=1;
-                strcpy(L_Usuario[i]->perfil,perfil);
+                strcpy(L_Usuario[i].perfil,perfil);
             }
         }
 
@@ -37,7 +37,7 @@ int main()
         /*Conmrpobamos con el array de usuarios si la contraseña, en caso contrario error*/
         i=0;
         while(i<elementos || passOK==0){
-            if(strcmp(pass,L_Usuario[i]->pass)){
+            if(strcmp(pass,L_Usuario[i].pass)){
                 passOK=1;
                 id=L_Usuario[i].id_usuario;
             }
