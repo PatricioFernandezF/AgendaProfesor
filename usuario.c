@@ -4,16 +4,18 @@
 #include "usuario.h"
 #include "fichero.h"
 
-void alta_usuario(Usuario*);
-void baja_usuario(Usuario*);
-void modificar_usuario(Usuario*);
-void listar_usuario(Usuario*);
+/*Jordi*/
+
+void alta_usuario(Usuario *usuario, int n);
+void baja_usuario(Usuario *usuario, int n);
+void modificar_usuario(Usuario *usuario, int n);
+void listar_usuario(Usuario *usuario, int n);
 void menu_usuario();
 
-// Cabecera: void alta_usuario(Usuario*)
-// Precondicion: Recibe una cadena de caracteres de un usuario.
-// Poscondicion:
-void alta_usuario(Usuario *usuario)
+// Cabecera: void alta_usuario(Usuario *usuario, entero n)
+// Precondicion: Recibe un vector con elementos de tipo usuario y el número de elemento del mismo
+// Poscondicion: Añade un nuevo elemento al vector
+void alta_usuario(Usuario *usuario, int n)
 {
     int opc=0;
     
@@ -54,10 +56,10 @@ void alta_usuario(Usuario *usuario)
     
     
 }
-// Cabecera: void baja_usuario(Usuario*)
-// Precondicion: Recibe una cadena de caracteres de un usuario.
-// Poscondicion:
-void baja_usuario(Usuario *usuario)
+// Cabecera: void baja_usuario(Usuario *usuario, entero n)
+// Precondicion: Recibe un vector con elementos de tipo usuario y el número de elemento del mismo
+// Poscondicion: Elimina un usuario del vector
+void baja_usuario(Usuario *usuario, int n)
 {
     int num;
     
@@ -66,17 +68,20 @@ void baja_usuario(Usuario *usuario)
     scanf("%d",&num);
     
 }
-// Cabecera: void modificar_usuario(Usuario*)
-// Precondicion: Recibe una cadena de caracteres de un usuario.
-// Poscondicion:
-void modificar_usuario(Usuario *usuario)
+// Cabecera: void modificar_usuario(Usuario *usuario, entero n)
+// Precondicion: Recibe un vector con elementos de tipo usuario y el número de elemento del mismo
+// Poscondicion: Modifica los datos de un usuario que se elige 
+void modificar_usuario(Usuario *usuario, int n)
 {
-    int numUser, numOpc, opc;
-    char cadena[50];
+    int numOpc, opc,i;
+    char numUser[4];
     
-    listar_usuario(&usuario);
+    listar_usuario(usuario);
     printf("Inidica que usuario desea modificar:");
-    scanf("%d",&numUser);
+    fgets (numUser, 4, stdin);
+    
+    i=0;
+    while(i<n || !strcmp(usuario[i].id_usuario,numUser)) i++;
     
     do{
         printf("Injdica que dato desea modificar:"
@@ -85,7 +90,7 @@ void modificar_usuario(Usuario *usuario)
         switch(numOpc){
             case 1:
                 printf("Introduce el nombre del usuario (20 cáracteres):");
-                fgets (newUser.nombre, 21, stdin);
+                fgets (usuario[i].nombre, 21, stdin);
                 break;
 
             case 2:
@@ -93,10 +98,10 @@ void modificar_usuario(Usuario *usuario)
                 do{
                     switch(opc){
                         case 1:
-                            strcpy("administrador",newUser.perfil);
+                            strcpy("administrador",usuario[i].perfil);
                             break;
                         case 2:
-                            strcpy("profesor",newUser.perfil);
+                            strcpy("profesor",usuario[i].perfil);
                             break;
                     }
                 }while(opc!=1 || opc!=2);
@@ -104,12 +109,12 @@ void modificar_usuario(Usuario *usuario)
 
             case 3:
                 printf("Introduce un nombre de usuario (5 cáracteres):");
-                fgets (newUser.login, 6, stdin);
+                fgets (usuario[i].login, 6, stdin);
                 break;
 
             case 4:
                 printf("Introduce una contraseña (8 cáracteres):");
-                fgets (newUser.pass, 9, stdin);
+                fgets (usuario[i].pass, 9, stdin);
                 break;
             
             default:
@@ -118,27 +123,28 @@ void modificar_usuario(Usuario *usuario)
     }while(numOpc<1 || numOpc>4);
     
 }
-// Cabecera: void listar_usuario(Usuario*)
-// Precondicion: Recibe una cadena de caracteres de un usuario.
-// Poscondicion:
-void listar_usuario(Usuario *usuario)
+// Cabecera: void listar_usuario(Usuario *usuario, entero n)
+// Precondicion: Recibe un vector con elementos de tipo usuario y el número de elemento del mismo
+// Poscondicion: Muestra los usuarios que hay en el vector
+void listar_usuario(Usuario *usuario, int n)
 {
-    int i, elemento;
+    int i;
     
     printf("ID\tNombre\n");
     
-    for(i=0; i<elemento; i++){
-        printf("%d) %s\n",usuario.id_usuario,usuario.nombre);
+    for(i=0; i<n; i++){
+        printf("%d) %s\n",usuario[i].id_usuario,usuario[i].nombre);
     }
     printf("---Fin de lista---");
 }
 // Cabecera: void menu_usuario()
-// Precondicion:
-// Poscondicion:
+// Precondicion: No recibe nada
+// Poscondicion: Muestra las operaciones a realizar con los usuarios del sistema
 void menu_usuario()
 {
-    int x;
-    Usuario*usuario;
+    int x,n;
+    Usuario *usuario=obtenerUsuarios(&n);
+    
     do
     {
         printf("Introduzca la opcion que desea\n\n 1: Dar de alta un usuario\n 2: Dar de baja a un usuario\n 3: Modificar un usuario\n 4: Listar un usuario\n 0: salir\n");
@@ -148,20 +154,27 @@ void menu_usuario()
         case 0:
             exit(0);
         case 1:
-            alta_usuario(usuario);
+            alta_usuario(usuario,n);
+            menu_usuario();
             break;
         case 2:
-            baja_usuario(usuario);
+            baja_usuario(usuario,n);
+            menu_usuario();
             break;
         case 3:
-            modificar_usuario(usuario);
+            modificar_usuario(usuario,n);
+            menu_usuario();
             break;
         case 4:
-            listar_usuario(usuario);
+            listar_usuario(usuario,n);
+            menu_usuario();
             break;
         default:
             printf("Error al elegir la opcion.\t");
             break;
         }
     }while(x!=0);
+    
+    guardarDatosUsuario(usuario,n);
+            
 }

@@ -4,6 +4,8 @@
 #include "profesor.h"
 #include "fichero.h"
 
+/*Jordi*/
+
 int main()
 {
     Usuario L_Usuario[1];
@@ -54,6 +56,8 @@ int main()
         menu_principal(strcmp(perfil,"administrador"),id);
     }
     
+    printf("\n\nMuchas gracias por usar este software.\n");
+    
     return 0;
 }
 
@@ -80,15 +84,19 @@ void menu_principal(int opc, int id)
                 exit(0);
             case 1:
                 menu_usuario();
+                menu_principal(opc,id);
                 break;
             case 2:
                 menu_alumno();
+                menu_principal(opc,id);
                 break;
             case 3:
                 menuMaterias();
+                menu_principal(opc,id);
                 break;
             case 4:
                 menuHorarios();
+                menu_principal(opc,id);
                 break;
             default:
                 printf("Error al elegir la opcion.\t");
