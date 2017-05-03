@@ -1,3 +1,4 @@
+/*Angel*/
 #include "horarios.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -40,37 +41,33 @@ void menuHorarios(){
 }
 
 /*cabecera: void anadirHorarios(Horario *horario, int n)
-precondición:
-postcondición: */
-
+precondición: Recibe un puntero a horarios y un entero.
+postcondición: No devuelve nada. Añade una linea al fichero horarios. */
 void anadirHorarios(Horario *horario, int n){
 Horario hor;
-hor.dia;
-hor.hora;
-hor.id_materia;
-hor.grupo;
-hor.id_profesor;
-
-/*printf("Introduzca el dia: \n");
-    fgets(hor.dia, , stdin);
-
-printf("Introduzca la hora: \n");
-    fgets(hor.hora, , stdin); */
 
 printf("Introduzca el profesor para esa hora: \n");
-    fgets(hor.id_profesor, 4, stdin);
-
+fflush(stdin);
+fgets(hor.id_profesor, 3, stdin);
+printf("Introduzca el dia para esa hora: \n");
+fflush(stdin);
+fgets(hor.dia, 2, stdin);
+printf("Introduzca la hora para esa hora: \n");
+fflush(stdin);
+fgets(hor.hora, 9, stdin);
 printf("Introduzca la materia para esa hora: \n");
-    fgets(hor.id_materia, 5, stdin);
-
+fflush(stdin);
+fgets(hor.id_materia, 4, stdin);
 printf("Introduzca el grupo de clase: \n");
-    fgets(hor.grupo, 11, stdin);
+fflush(stdin);
+fgets(hor.grupo, 10, stdin);
+
+guardarDatosHorarios();
 }
 
 /*cabecera: void eliminarHorarios(Horario *horario, int n)
-precondición:
-postcondición: */
-
+precondición: Recibe un puntero a horario y un entero n.
+postcondición: No devuelve nada. Elimina una linea del fichero horarios. */
 void eliminarHorarios(Horario *horario, int n){
 
     int id,i;
@@ -81,16 +78,11 @@ void eliminarHorarios(Horario *horario, int n){
     Horario aux[n];
     id-=1;
 
-    for(i=0;i<n;i++)
-    {
-        if(i<id)
-        {
+    for(i=0;i<n;i++){
+        if(i<id){
             aux[i]=horario[i];
         }
-        else if(i==id)
-        {
-
-        }
+        else if(i==id){}
         else{
             aux[i-1]=horario[i];
         }
@@ -99,9 +91,8 @@ void eliminarHorarios(Horario *horario, int n){
 }
 
 /*cabecera: void modificarHorarios(Horario *horario, int n)
-precondición:
-postcondición: */
-
+precondición: Recibe un puntero a horario y un entero n.
+postcondición: No devuelve nada. Modifica alguna linea del fichero horarios. */
 void modificarHorarios(Horario *horario, int n){
 listarHorarios(&horario, n);
 }
@@ -109,7 +100,6 @@ listarHorarios(&horario, n);
 /*cabecera: void listarHorarios(Horario *horario, int n)
 precondición: Puntero a materia y entero con el numero de elementos del vector.
 postcondición: No devuelve nada, imprime por pantalla la lista de horarios. */
-
 void listarHorarios(Horario *horario, int n){
 
 int i;

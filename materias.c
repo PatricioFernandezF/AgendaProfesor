@@ -1,3 +1,4 @@
+/*Angel*/
 #include "materias.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,39 +33,47 @@ do{
 }
 
 
-/*cabecera: void altaMaterias()
-precondicion:
-postcondicion:      */
+/*cabecera: void altaMaterias(Materia *materia, int n)
+precondicion: Recibe un puntero a materia y un entero n.
+postcondicion: No devuelve nada. Imprime una nueva linea en el fichero.     */
 void altaMaterias(Materia *materia, int n){
 
 Materia mat;
 mat.nombre;
 mat.abreviatura;
 
+printf("\nIndique el ID de la materia a dar de alta: ");
+fflush(stdin);
+fgets(mat.id_materia, 4, stdin);
 printf("\nIndique el nombre de la materia a dar de alta: ");
-    fgets(mat.nombre, 51, stdin);
-
+fflush(stdin);
+fgets(mat.nombre, 50, stdin);
 printf("\nIndique la abreviatura de la materia: \n");
-    fgets(mat.abreviatura, 4, stdin);
+fflush(stdin);
+fgets(mat.abreviatura, 3, stdin);
 
+
+guardarDatosMateria(materia, n);
 }
 
-/*cabecera: altaMaterias()
-precondicion:
-postcondicion:      */
+/*cabecera: altaMaterias(Materia *materia, int n)
+precondicion: Recibe un puntero a materia y un entero n.
+postcondicion: No devuelve nada. Borra una linea del fichero.       */
 void bajaMaterias(Materia *materia, int n){
 Materia mat;
 mat.nombre;
 
 listarMaterias(&materia, n);
 printf("\nIndique el nombre de la materia a dar de baja: ");
+fflush(stdin);
 fgets(mat.nombre, 51, stdin);
 
+guardarDatosMateria();
 }
 
-/*cabecera: bajaMaterias()
-precondicion:
-postcondicion:      */
+/*cabecera: bajaMaterias(Materia *materia, int n)
+precondicion: Recibe un puntero a materia y un entero n.
+postcondicion: No devuelve nada. Modifica uno o varios campos de una linea del fichero materias.  */
 void modificarMaterias(Materia *materia, int n){
 Materia mat;
 mat.nombre;

@@ -1,6 +1,5 @@
 #ifndef MATERIAS_H_INCLUDED
 #define MATERIAS_H_INCLUDED
-
 #include "fichero.h"
 
 void menuMaterias();
