@@ -79,16 +79,16 @@ void menu_principal(int opc, int id)
             case 0:
                 exit(0);
             case 1:
-                alta_usuario(usuario);
+                menu_usuario();
                 break;
             case 2:
-                baja_usuario(usuario);
+                menu_alumno();
                 break;
             case 3:
-                modificar_usuario(usuario);
+                menuMaterias();
                 break;
             case 4:
-                listar_usuario(usuario);
+                menuHorarios();
                 break;
             default:
                 printf("Error al elegir la opcion.\t");

@@ -30,7 +30,7 @@ void menu_profesor(int idProf){
             case 0:
                 exit(0);
             case 1:
-                strcpy(grupoSel,seleccionar_grupo_dia(lista,idProf));
+                strcpy(grupoSel,seleccionar_grupos_dia(lista,idProf));
                 menu_profesor(idProf);
                 break;
             case 2:
